@@ -1,0 +1,51 @@
+.content__guest {
+    opacity: .2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: calc(100% - 115px);
+
+    .left, .right {
+    }
+    
+    .left {
+        flex-basis: 60%;
+        margin: 0 29px;
+
+        h1 {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        input {
+            width: -webkit-fill-available;
+            margin-bottom: 1rem;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+
+            button {
+                padding: 10.5px 3rem;
+                width: -webkit-fill-available;
+
+                &:last-child {
+                    background-color: #F8DA27;
+                    color: #000;
+
+                    &:hover {
+                        filter: brightness(110%);
+                    }
+                }
+                
+            }
+        }
+    }
+
+    .right {
+        flex-basis: 40%;
+        text-align: center;
+    }
+}

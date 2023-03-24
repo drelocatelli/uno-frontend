@@ -1,0 +1,16 @@
+body {
+    background: url('/assets/img/bg02.png') no-repeat;
+    background-size: cover;
+    animation: animation-background 15s ease-out;
+    background-attachment: fixed;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes animation-background { 
+    0%{background-position:0% 5%}
+
+    50%{background-position:0% 50%}
+
+    100%{background-position:100%}
+}
