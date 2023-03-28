@@ -2,15 +2,17 @@
     position: fixed;
     top: 15px;
     right: 15px;
-    background: white;
+    background: #0096dc;
     width: 18rem;
     padding: 1rem;
+    font-weight: bold;
+    color: #fff;
     word-wrap: break-word;
     box-sizing: border-box;
     max-height: 160px;
     overflow-y: auto;
-    border: 3px solid #607d8b;
-    box-shadow: 0px 0px 16px #00000045;
+    border: 3px solid #ffffff;
+    box-shadow: -3px 3px 1px rgb(0 0 0 / 27%);
     font-size: 13px;
     user-select: none;
     cursor: pointer;
@@ -18,6 +20,6 @@
     opacity: 0.8;
 
     &:hover {
-        opacity: 1;
+        opacity: 1!important;
     }
 }
