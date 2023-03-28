@@ -7,6 +7,13 @@ body {
 
 }
 
+.errorInput {
+    color: #a53838;
+    padding: 0.5rem 0;
+    display: block;
+    pointer-events: none;
+}
+
 @keyframes animation-background { 
     0%{background-position:0% 5%}
 
