@@ -4,6 +4,7 @@ import './guest.scss';
 import { TabFx } from './login.animation';
 
 function Guest() {
+
     useEffect(() => {
         TabFx('.content__guest');
     }, []);
@@ -22,14 +23,14 @@ function Guest() {
         }
         // if(target.name == 'enter') {
 
-        // } else {
+        // } else if(target.name == 'createRoom') {
 
         // }
         
     }
 
-    async function handleLogin(formData: FormData) {
-        await Authentication.authAsGuest({username: formData.get('username')!.toString()});
+    function handleLogin(formData: FormData) {
+        Authentication.authAsGuest({username: formData.get('username')!.toString()});
     }
 
     return(

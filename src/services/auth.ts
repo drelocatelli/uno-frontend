@@ -6,7 +6,7 @@ class Authentication {
     static async authAsGuest(user: User) {
         try {
             const avatarSeed = await this.getAvatarSeed();
-            const login = await instance.post('authentication/login', {...user, avatarSeed: avatarSeed.data.seed});
+            const login = await instance.post('authentication/register', {...user, avatarSeed: avatarSeed.data.seed});
             console.log(login)
         } catch(err) {
             console.log(err)
