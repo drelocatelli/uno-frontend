@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Authentication from '../../services/auth';
 import './guest.scss';
 import { TabFx } from './login.animation';
 
 function Guest() {
+    const dispatch = useDispatch();
 
     useEffect(() => {
         TabFx('.content__guest');
@@ -18,8 +20,6 @@ function Guest() {
             const usernameErrorEl = document.querySelector('#usernameError') as HTMLSpanElement;
             const usernameIn = (target!.form![0] as HTMLInputElement);
             usernameErrorEl.innerHTML = usernameIn.validationMessage;
-            console.log(usernameIn.validationMessage)
-
         }
         // if(target.name == 'enter') {
 
@@ -30,7 +30,7 @@ function Guest() {
     }
 
     function handleLogin(formData: FormData) {
-        Authentication.authAsGuest({username: formData.get('username')!.toString()});
+        dispatch(Authentication.authAsGuest({username: formData.get('username')!.toString()}) as any);
     }
 
     return(

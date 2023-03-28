@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../../store/alert/alertReducer';
+import { IRootState } from '../../store/store';
 import Guest from './guest.component';
 import LoginFx from './login.animation';
 import './login.scss';
@@ -11,6 +12,7 @@ function Login() {
     const [login, setLogin] = useState<boolean>(false);
     const [mounted, setMounted] = useState<boolean>(false);
     const dispatch = useDispatch();
+    const {login: loginState} = useSelector(state => state) as IRootState;
 
     useEffect(() => {
         if (!mounted) {
@@ -37,7 +39,11 @@ function Login() {
                         Fazer Login
                     </div>
                 </div>
-                {login ? <User /> : <Guest />}
+                {loginState.type == 'initial' ? (
+                    <>
+                        {login ? <User /> : <Guest />}
+                    </>
+                ): null}
             </div>
         </div>
     );
