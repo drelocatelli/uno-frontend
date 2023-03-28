@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../../store/alert/alertReducer';
+import { ILoginState } from '../../store/login/loginReducer';
 import { IRootState } from '../../store/store';
 import Guest from './guest.component';
 import LoginFx from './login.animation';
@@ -12,7 +13,7 @@ function Login() {
     const [login, setLogin] = useState<boolean>(false);
     const [mounted, setMounted] = useState<boolean>(false);
     const dispatch = useDispatch();
-    const {login: loginState} = useSelector(state => state) as IRootState;
+    const {type: loginState} = useSelector((state: IRootState) => state.login) as ILoginState;
 
     useEffect(() => {
         if (!mounted) {
@@ -39,9 +40,13 @@ function Login() {
                         Fazer Login
                     </div>
                 </div>
-                {loginState.type == 'initial' ? (
+                {loginState == 'initial' || loginState == 'error' ? (
                     <>
                         {login ? <User /> : <Guest />}
+                    </>
+                ): loginState == 'loading' ? (
+                    <>
+                        Aguarde...
                     </>
                 ): null}
             </div>
