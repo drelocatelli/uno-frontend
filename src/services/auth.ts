@@ -17,7 +17,7 @@ class Authentication {
                     {...user, avatarSeed: avatarSeed.data.seed}, 
                 );
                 
-                dispatch(loginActions.setType({type: 'ok'}));
+                // dispatch(loginActions.setType({type: 'ok'}));
             } catch(err) {
                 console.log(err)
                 dispatch(loginActions.setType({type: 'error'}));
