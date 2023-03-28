@@ -20,7 +20,7 @@ function Login() {
     }, [mounted]);
     
     function easterEgg() {
-        dispatch(alertActions.setModal({message: 'Olá mundo!', isActive: true}))
+        dispatch(alertActions.setModal({message: 'Olá mundo!', isActive: true, temporary: true}))
     }
     
     return (
