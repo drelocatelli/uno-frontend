@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { alertActions } from '../../store/alert/alertReducer';
 import Guest from './guest.component';
 import LoginFx from './login.animation';
 import './login.scss';
@@ -8,6 +10,7 @@ import User from './user.component';
 function Login() {
     const [login, setLogin] = useState<boolean>(false);
     const [mounted, setMounted] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (!mounted) {
@@ -16,9 +19,13 @@ function Login() {
         }
     }, [mounted]);
     
+    function easterEgg() {
+        dispatch(alertActions.setModal({message: 'Olá mundo!', isActive: true}))
+    }
+    
     return (
         <div id="app">
-            <a href="/" className="logo">
+            <a href="javascript:void(0);" className="logo" onClick={easterEgg}>
                 <img src="/assets/img/logo.png" />
             </a>
             <div className="container">
