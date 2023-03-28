@@ -4,11 +4,13 @@ import { ReactNode } from "react";
 export interface IAlertState {
     message?: ReactNode;
     isActive: boolean;
+    temporary: boolean;
 }
 
 const initialState : IAlertState = {
     message: 'Bem vindo ao jogo =)',
-    isActive: true
+    isActive: true,
+    temporary: true
 };
 
 const alertSlice = createSlice({
@@ -18,7 +20,11 @@ const alertSlice = createSlice({
         setModal: (state, action: PayloadAction<IAlertState>) => {
             state.message = action.payload?.message ?? state.message;
             state.isActive = action.payload.isActive;
-        }
+            state.temporary = action.payload.temporary;
+        },
+        closeModal:(state) => {
+            state.isActive = false;
+        },
     }
 });
 

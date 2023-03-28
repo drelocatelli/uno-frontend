@@ -19,14 +19,19 @@ function Alert() {
         if(!alert.isActive) {
             AlertCloseFx();
         }
+        if(alert.temporary) {
+            setTimeout(() => {
+                dispatch(alertActions.closeModal());
+            }, 5000)
+        }
     }, [alert])
     
     function toggleAlert() {
-        dispatch(alertActions.setModal({isActive: false}));
+        dispatch(alertActions.closeModal());
     }
     
     return(
-        <div className="alert" onClick={toggleAlert}>
+        <div className="alert" onClick={toggleAlert} data-temporary={alert.temporary}>
             {alert.message}
         </div>
     );
