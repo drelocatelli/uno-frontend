@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Authentication from '../../services/auth';
+import formValidation from '../formValidation/formValidation.component';
 import './guest.scss';
 import { TabFx } from './login.animation';
 
@@ -17,9 +18,7 @@ function Guest() {
         if(target.form?.checkValidity()) {
             handleLogin(formData);
         } else {
-            const usernameErrorEl = document.querySelector('#usernameError') as HTMLSpanElement;
-            const usernameIn = (target!.form![0] as HTMLInputElement);
-            usernameErrorEl.innerHTML = usernameIn.validationMessage;
+            formValidation(target.form!.elements);
         }
         // if(target.name == 'enter') {
 

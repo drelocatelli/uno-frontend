@@ -1,12 +1,12 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { alertActions } from "../store/alert/alertReducer";
 import { loginActions } from "../store/login/loginReducer";
-import { User } from "./auth.type";
+import { Guest, User } from "./auth.type";
 import { instance } from "./instance";
 
 class Authentication {
     
-    static authAsGuest(user: User) {
+    static authAsGuest(user: Guest) {
         return async (dispatch: Dispatch) => {
             dispatch(loginActions.setType({type: 'loading'}));
 
@@ -24,6 +24,16 @@ class Authentication {
                 dispatch(alertActions.setModal({isActive: true, temporary: true, message: 'Ocorreu um erro inesperado, tente novamente'}));
             }
         }
+    }
+
+    static authAsUser(user: User) {
+        return async (dispatch: Dispatch) => {
+            try {
+
+            } catch(err) {
+                console.log(err);
+            }
+        };
     }
 
     static getAvatarSeed() {
