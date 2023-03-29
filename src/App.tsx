@@ -1,11 +1,11 @@
 import Alert from './components/alert/alert.component';
-import Login from './components/login/login.component';
+import Routes from './routes';
 
 function App() {
 
     return (
         <>
-            <Login />
+            <Routes />
             <Alert />
         </>
     );
