@@ -1,9 +1,11 @@
 import { Dispatch } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
 import { sleep } from "../components/basics/sleep";
 import { alertActions } from "../store/alert/alertReducer";
 import { loginActions } from "../store/login/loginReducer";
 import { Guest, User } from "./auth.type";
 import { instance } from "./instance";
+import { RequestError } from "./request-error.type";
 
 class Authentication {
     
@@ -41,8 +43,13 @@ class Authentication {
                 
                 dispatch(loginActions.setType({type: 'ok'}));
             } catch(err) {
+                let error = err as AxiosError;
+                if(error.response?.status == 400) {
+                    dispatch(alertActions.setModal({isActive: true, temporary: true, message: 'E-mail e senha não conferem'}));
+                } else {
+                    dispatch(alertActions.setModal({isActive: true, temporary: true, message: 'Ocorreu um erro inesperado, tente novamente'}));
+                }
                 dispatch(loginActions.setType({type: 'error'}));
-                dispatch(alertActions.setModal({isActive: true, temporary: true, message: 'Ocorreu um erro inesperado, tente novamente'}));
             }
 
         };

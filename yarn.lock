@@ -1069,6 +1069,11 @@ regenerator-runtime@^0.13.11:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
+request-error@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/request-error/-/request-error-2.0.1.tgz#f012347760556cc66f53520156e94b292b2aa518"
+  integrity sha512-I8JdzatGc13lTPBO99vmEcCLEp7LOX/PDYzhWa3jOB0vWRH39rTmi+8J8Is20iYVeXj/W1O9dHFwUvFjROCsKA==
+
 reselect@^4.1.7:
   version "4.1.7"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.1.7.tgz#56480d9ff3d3188970ee2b76527bd94a95567a42"
