@@ -23,6 +23,12 @@ function Login() {
         }
     }, [mounted]);
 
+    useEffect(() => {
+        if(loginState == 'ok') {
+            alert('redirecionando....')
+        }
+    }, [loginState]);
+
     function easterEgg() {
         dispatch(alertActions.setModal({ message: 'Olá mundo!', isActive: true, temporary: true }));
     }

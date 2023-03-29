@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Authentication from '../../services/auth';
-import formValidation from '../formValidation/formValidation.component';
+import formValidation from '../basics/formValidation.component';
 import './guest.scss';
 import { TabFx } from './login.animation';
 
@@ -14,9 +14,8 @@ function Guest() {
 
     function submitForm(e: React.MouseEvent) {
         const target = e.target as HTMLButtonElement;
-        const formData = new FormData(target.form as HTMLFormElement);
         if(target.form?.checkValidity()) {
-            handleLogin(formData);
+            handleLogin(new FormData(target.form as HTMLFormElement));
         } else {
             formValidation(target.form!.elements);
         }
