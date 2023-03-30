@@ -1,4 +1,30 @@
 #app {
+    .first-header {
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .first-header-content {
+            color: #fff;
+            font-size: 24px;
+            letter-spacing: -1px;
+            font-weight: 600;
+            margin: 0 1rem;
+            margin-bottom: 2rem;
+
+            img {
+                position: relative;
+                top: 10px;
+            }
+
+            input[type="checkbox"] {
+                zoom: 1.5;
+            }
+        }
+    }
+
     .lobby {
         position: relative;
         border-radius: 10px;

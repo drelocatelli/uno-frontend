@@ -1,16 +1,26 @@
 import Validate from './validate.component';
 import './lobby.scss';
 import RoomCard from './roomCard.component';
-import { FormEvent, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../../store/store';
+import { FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
 import { alertActions } from '../../store/alert/alertReducer';
 function Lobby() {
     return (
         <Validate>
-            <a href="/" className="logo showFx" style={{ marginBottom: '10px', zIndex: '1' }}>
-                <img src="/assets/img/logo.png" />
-            </a>
+            <div className="first-header">
+                <div className='first-header-content'>
+                    <div className="checkbox">
+                        <input type="checkbox" name="roomFull" id="roomFull" />
+                        <label htmlFor="roomFull">Mostrar salas cheias</label>
+                    </div>
+                </div>
+                <a href="/" className="logo showFx" style={{ marginBottom: '10px', zIndex: '1' }}>
+                    <img src="/assets/img/logo.png" />
+                </a>
+                <div className='first-header-content'>
+                    <img src="/assets/img/user-example.png" />
+                </div>
+            </div>
             <div className="lobby showFx">
                 <Header />
                 <div className="outer">
