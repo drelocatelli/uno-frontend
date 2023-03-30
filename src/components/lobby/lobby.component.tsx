@@ -1,9 +1,10 @@
 import Validate from './validate.component';
 import './lobby.scss';
 import RoomCard from './roomCard.component';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { FormEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../store/store';
+import { alertActions } from '../../store/alert/alertReducer';
 function Lobby() {
     return (
         <Validate>
@@ -48,13 +49,37 @@ function Header() {
 }
 
 function Rooms() {
+    const dispatch = useDispatch();
+
+    function selectRoom(e: FormEvent) {
+        e.preventDefault();
+        const target = e.target as HTMLFormElement;
+        const roomSelected = new FormData(target).get('room');
+        if(roomSelected == null) {
+            dispatch(alertActions.setModal({isActive: true, temporary: true, message: 'Você deve escolher uma sala primeiro!'}));
+        } else {
+            dispatch(alertActions.setModal({isActive: true, temporary: true, message: `Sala selecionada: ${roomSelected}`}));
+        }
+    }
     
     return (
-        <div className="rooms">
-            {Array.from(Array(15), (e, i) => (
-                <RoomCard key={i} id={i.toString()} title="Sala02LimiteCaract" count="4/4" user="user" disabled={i % 2 == 0} />
-            ))}
-        </div>
+        <>
+            <form onSubmit={selectRoom}>
+                <div className="rooms">
+                    {Array.from(Array(15), (e, i) => (
+                        <RoomCard key={i} id={i.toString()} title="Sala02LimiteCaract" count="4/4" user="user" disabled={i % 2 == 0} />
+                    ))}
+                </div>
+                <div className="controls">
+                    <button type="submit" style={{padding: '.8rem 5rem'}}>Entrar</button>
+                    <div className='pagination'>
+                        <img src="/assets/img/arrow_left.png" />
+                        <div className="page">1 / 20</div>
+                        <img src="/assets/img/arrow_left.png" style={{rotate: '180deg'}} />
+                    </div>
+                </div>
+            </form>
+        </>
     );
 }
 
