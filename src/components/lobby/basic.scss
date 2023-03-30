@@ -1,0 +1,17 @@
+@keyframes opac {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#app {
+    
+    .showFx {
+        animation: opac .8s;
+    }
+
+
+}
