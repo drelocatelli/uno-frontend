@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { alertActions } from '../../store/alert/alertReducer';
 import { ILoginState } from '../../store/login/loginReducer';
 import { IRootState } from '../../store/store';
@@ -11,6 +12,7 @@ import './login.scss';
 import User from './user.component';
 
 function Login() {
+    const navigate = useNavigate();
     const [login, setLogin] = useState<boolean>(false);
     const [mounted, setMounted] = useState<boolean>(false);
     const dispatch = useDispatch();
@@ -25,7 +27,7 @@ function Login() {
 
     useEffect(() => {
         if(loginState == 'ok') {
-            alert('redirecionando....')
+            navigate('/lobby');
         }
     }, [loginState]);
 
