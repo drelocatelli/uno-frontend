@@ -1,7 +1,7 @@
 body {
     background: url('/assets/img/bg02.png') no-repeat;
     background-size: cover;
-    animation: animation-background 15s ease-out;
+    animation: animation-background 35s ease-in-out;
     background-attachment: fixed;
     animation-fill-mode: forwards;
 
@@ -14,6 +14,7 @@ body {
     pointer-events: none;
 }
 
+
 @keyframes animation-background { 
     0%{background-position:0% 5%}
 
@@ -21,109 +22,3 @@ body {
 
     100%{background-position:100%}
 }
-
-.lds-ripple {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-  }
-  .lds-ripple div {
-    position: absolute;
-    border: 4px solid #fff;
-    opacity: 1;
-    border-radius: 50%;
-    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-  }
-  .lds-ripple div:nth-child(2) {
-    animation-delay: -0.5s;
-  }
-  @keyframes lds-ripple {
-    0% {
-      top: 36px;
-      left: 36px;
-      width: 0;
-      height: 0;
-      opacity: 0;
-    }
-    4.9% {
-      top: 36px;
-      left: 36px;
-      width: 0;
-      height: 0;
-      opacity: 0;
-    }
-    5% {
-      top: 36px;
-      left: 36px;
-      width: 0;
-      height: 0;
-      opacity: 1;
-    }
-    100% {
-      top: 0px;
-      left: 0px;
-      width: 72px;
-      height: 72px;
-      opacity: 0;
-    }
-  }
-
-@keyframes ldio-5xgl83h588 {
-  0% { transform: scale(1.1500000000000001) }
-  100% { transform: scale(1) }
-}
-.ldio-5xgl83h588 div {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  top: 13.333333333333336px;
-  left: 13.333333333333336px;
-  background: #ed1a24;
-  animation: ldio-5xgl83h588 1s cubic-bezier(0,0.5,0.5,1) infinite;
-  animation-delay: -0.3s;
-  border-radius: 5px;
-
-}
-.ldio-5xgl83h588 div:nth-child(2) {
-  top: 13.333333333333336px;
-  left: 106.66666666666666px;
-  background: #0096dc;
-  animation-delay: -0.2s;
-  border-radius: 5px;
-
-}
-.ldio-5xgl83h588 div:nth-child(3) {
-  top: 106.66666666666666px;
-  left: 13.333333333333336px;
-  background: #01a54e;
-  animation-delay: 0s;
-  border-radius: 5px;
-
-}
-.ldio-5xgl83h588 div:nth-child(4) {
-  top: 106.66666666666666px;
-  left: 106.66666666666666px;
-  background: #fddd03;
-  animation-delay: -0.1s;
-  border-radius: 5px;
-
-}
-.loadingio-spinner-cube-6swp5biih6b {
-  width: 200px;
-  height: 200px;
-  display: inline-block;
-  overflow: hidden;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: -6px 10px 0px rgb(0 0 0 / 53%), 0 -11px 29px rgb(0 0 0 / 10%);
-}
-.ldio-5xgl83h588 {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform: translateZ(0) scale(1);
-  backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
-}
-.ldio-5xgl83h588 div { box-sizing: content-box; }

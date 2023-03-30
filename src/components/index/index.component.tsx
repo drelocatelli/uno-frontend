@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import UserService from "../../services/user";
 import { IRootState } from "../../store/store";
-import { ColorfulLoading } from "../loading/loading.component";
+import { GooeyRingLoading } from "../loading/loading.component";
 import Login from "../login/login.component";
-import { IndexFX } from "./index.animation";
+import { IndexFX, IndexFXEnd } from "./index.animation";
 import './index.scss';
 
 function Index() {
@@ -27,6 +27,12 @@ function Index() {
     }, [animationFinished]);
 
     useEffect(() => {
+        if(authState.st == 'finished') {
+            IndexFXEnd();
+        }
+    }, [authState])
+
+    useEffect(() => {
         if(authState.authenticated) {
             navigate('/lobby');
         }
@@ -34,14 +40,12 @@ function Index() {
 
     return(
         <div id="app">
-           <a href="/" className="logo" style={{marginBottom: '10px'}}>
+           <a href="/" className="logo" style={{marginBottom: '10px', zIndex: '1'}}>
                 <img src="/assets/img/logo.png" />
             </a>
-            {!authState.authenticated && authState.st == 'initial' && (
-                <div className="initialLoading" style={{opacity: '0', scale: '.5'}}>
-                    <ColorfulLoading />
-                </div>
-            )}
+            <div className="initialLoading" style={{opacity: '0'}}>
+                <GooeyRingLoading size=".8" />
+            </div>
             {(!authState.authenticated && authState.st == 'finished') && (
                 <Login />
             )}
