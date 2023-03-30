@@ -8,9 +8,9 @@ export interface IAlertState {
 }
 
 const initialState : IAlertState = {
-    message: 'Bem vindo ao jogo =)',
-    isActive: true,
-    temporary: true
+    message: undefined,
+    isActive: false,
+    temporary: false
 };
 
 const alertSlice = createSlice({
