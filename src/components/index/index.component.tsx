@@ -37,9 +37,11 @@ function Index() {
            <a href="/" className="logo" style={{marginBottom: '10px'}}>
                 <img src="/assets/img/logo.png" />
             </a>
-            <div className="initialLoading" style={{opacity: '0', scale: '.5'}}>
-                <ColorfulLoading />
-            </div>
+            {!authState.authenticated && authState.st == 'initial' && (
+                <div className="initialLoading" style={{opacity: '0', scale: '.5'}}>
+                    <ColorfulLoading />
+                </div>
+            )}
             {(!authState.authenticated && authState.st == 'finished') && (
                 <Login />
             )}
