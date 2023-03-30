@@ -1,10 +1,11 @@
 import { Dispatch } from "@reduxjs/toolkit";
+import { sleep } from "../components/basics/sleep";
 import { authActions } from "../store/auth/authReducer";
 import { instance } from "./instance";
 
 class UserService {
 
-    static validate() {
+    static validate(onFail?: Function) {
         return async (dispatch: Dispatch) => {
             try {
                 await instance.get('profile');
@@ -12,6 +13,8 @@ class UserService {
             } catch(err) {
                 console.log(err)
                 dispatch(authActions.setAuth({authenticated: false, st: 'finished'}));
+                if(onFail) 
+                onFail();
             }
         };
     }

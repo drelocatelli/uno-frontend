@@ -1,10 +1,12 @@
 body {
     background: url('/assets/img/bg02.png') no-repeat;
     background-size: cover;
-    animation: animation-background 35s ease-in-out;
     background-attachment: fixed;
     animation-fill-mode: forwards;
+}
 
+body.animated {
+    animation: animation-background 35s ease-in-out;
 }
 
 .errorInput {

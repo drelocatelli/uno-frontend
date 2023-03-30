@@ -15,6 +15,7 @@ function Index() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.body.classList.add('animated');
         if(!animationFinished) {
             IndexFX(() => setAnimationFinished(true));
         }
