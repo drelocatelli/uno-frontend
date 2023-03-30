@@ -19,7 +19,7 @@
             width: -webkit-fill-available;
             display: flex;
             align-items: center;
-            padding: 1rem 3rem;
+            padding: 0.5rem 3rem;
             justify-content: space-between;
             transition: background 0.6s;
 
@@ -34,11 +34,11 @@
         }
 
         .rooms {
-            padding: 1rem;
+            padding: 0 1rem;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: .3rem;
             justify-content: space-evenly;
 
             .card-label {
@@ -49,6 +49,30 @@
                     }
                 }
             }
+
         }
+
+        .controls {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            padding: 2px 1rem;
+            padding-bottom: 1rem;
+
+            .pagination {
+                display: flex;
+                user-select: none;
+                flex-direction: row;
+                gap: 20px;
+                color: #fff;
+                font-size: 28px;
+
+                img {
+                    cursor: pointer;
+                }
+            }
+        }
+
     }
 }
