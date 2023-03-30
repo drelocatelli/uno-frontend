@@ -5,7 +5,6 @@ import { alertActions } from "../store/alert/alertReducer";
 import { loginActions } from "../store/login/loginReducer";
 import { Guest, User } from "./auth.type";
 import { instance } from "./instance";
-import { RequestError } from "./request-error.type";
 
 class Authentication {
     
@@ -16,10 +15,12 @@ class Authentication {
             try {
                 await sleep(5000);
                 const avatarSeed = await this.getAvatarSeed();
-                await instance.post(
+                const response = await instance.post(
                     'authentication/register', 
                     {...user, avatarSeed: avatarSeed.data.seed}, 
                 );
+
+                console.log(response)
                 
                 dispatch(loginActions.setType({type: 'ok'}));
             } catch(err) {
@@ -44,6 +45,7 @@ class Authentication {
                 dispatch(loginActions.setType({type: 'ok'}));
             } catch(err) {
                 let error = err as AxiosError;
+                console.log(error)
                 if(error.response?.status == 400) {
                     dispatch(alertActions.setModal({isActive: true, temporary: true, message: 'E-mail e senha não conferem'}));
                 } else {

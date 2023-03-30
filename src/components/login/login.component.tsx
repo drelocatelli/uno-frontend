@@ -18,8 +18,8 @@ function Login() {
 
     useEffect(() => {
         if (!mounted) {
-            setMounted(true);
             LoginFx();
+            setMounted(true);
         }
     }, [mounted]);
 
@@ -34,30 +34,25 @@ function Login() {
     }
 
     return (
-        <div id="app">
-            <a href="javascript:void(0);" className="logo" onClick={easterEgg}>
-                <img src="/assets/img/logo.png" />
-            </a>
-            <div className="container">
-                <div className="tabs">
-                    <div className={`tab ${!login && 'active'}`} onClick={() => setLogin(false)}>
-                        Convidado
-                    </div>
-                    <div className={`tab ${login && 'active'}`} onClick={() => setLogin(true)}>
-                        Fazer Login
-                    </div>
+        <div className="container">
+            <div className="tabs">
+                <div className={`tab ${!login && 'active'}`} onClick={() => setLogin(false)}>
+                    Convidado
                 </div>
-                {loginState == 'initial' || loginState == 'error' ? (
-                    <>{login ? <User /> : <Guest />}</>
-                ) : (
-                    loginState == 'loading' && (
-                        <div style={{transform:'translateY(50%)', textAlign: 'center', scale: '.6'}}>
-                            <ColorfulLoading />
-                            <h1 style={{color: '#fff', position: 'relative', top: '6rem', userSelect: 'none'}}>Aguardando entrada no lobby...</h1>
-                        </div>
-                    )
-                )}
+                <div className={`tab ${login && 'active'}`} onClick={() => setLogin(true)}>
+                    Fazer Login
+                </div>
             </div>
+            {loginState == 'initial' || loginState == 'error' ? (
+                <>{login ? <User /> : <Guest />}</>
+            ) : (
+                loginState == 'loading' && (
+                    <div style={{transform:'translateY(50%)', textAlign: 'center', scale: '.6'}}>
+                        <ColorfulLoading />
+                        <h1 style={{color: '#fff', position: 'relative', top: '6rem', userSelect: 'none'}}>Aguardando entrada no lobby...</h1>
+                    </div>
+                )
+            )}
         </div>
     );
 }

@@ -1,11 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./components/login/login.component";
+import Index from "./components/index/index.component";
+import Lobby from "./components/lobby/lobby.component";
 
 function Router() {
+    
     return(
         <BrowserRouter>
             <Routes>
-                <Route index={true} path='/' element={<Login />} />
+                <Route index={true} path='/' element={<Index />} />
+                <Route path='/lobby' element={<Lobby />} />
             </Routes>
         </BrowserRouter>
     );

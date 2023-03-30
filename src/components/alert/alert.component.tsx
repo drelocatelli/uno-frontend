@@ -31,7 +31,7 @@ function Alert() {
     }
     
     return(
-        <div className="alert" onClick={toggleAlert} data-temporary={alert.temporary}>
+        <div className="alert" style={{display: alert.isActive ? 'block': 'none'}} onClick={toggleAlert} data-temporary={alert.temporary}>
             {alert.message}
         </div>
     );
