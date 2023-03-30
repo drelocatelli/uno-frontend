@@ -1,13 +1,16 @@
-function RoomCard(props: {title: string, user: string, count: string, disabled?: boolean}) {
+function RoomCard(props: { id: string; title: string; user: string; count: string; disabled?: boolean }) {
     return (
-        <div className={`card ${props.disabled ? 'disabled' : ''}`}>
-            <b>{props.title}</b>
-            <div className="user">#{props.user}</div>
-            <div className="users-count">
-                <i className="fa-regular fa-user"></i>
-                <span>{props.count}</span>
+        <label className="card-label" htmlFor={`${props.id}_radio`}>
+                    <input type="radio" id={`${props.id}_radio`} className="roomRadio" name="room" disabled={props.disabled ?? false} />
+            <div id={props.id} className={`card ${props.disabled ? 'disabled' : ''}`}>
+                <b>{props.title}</b>
+                <div className="user">#{props.user}</div>
+                <div className="users-count">
+                    <i className="fa-regular fa-user"></i>
+                    <span>{props.count}</span>
+                </div>
             </div>
-        </div>
+        </label>
     );
 }
 

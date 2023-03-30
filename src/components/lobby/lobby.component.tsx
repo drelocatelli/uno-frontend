@@ -1,6 +1,9 @@
 import Validate from './validate.component';
 import './lobby.scss';
 import RoomCard from './roomCard.component';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../../store/store';
 function Lobby() {
     return (
         <Validate>
@@ -8,8 +11,8 @@ function Lobby() {
                 <img src="/assets/img/logo.png" />
             </a>
             <div className="lobby showFx">
+                <Header />
                 <div className="outer">
-                    <Header />
                     <Rooms />
                 </div>
             </div>
@@ -45,107 +48,12 @@ function Header() {
 }
 
 function Rooms() {
+    
     return (
         <div className="rooms">
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" /> 
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="4/4" user="user" disabled={true} />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
-            <RoomCard title="Sala02LimiteCaract" count="3/4" user="user" />
+            {Array.from(Array(15), (e, i) => (
+                <RoomCard key={i} id={i.toString()} title="Sala02LimiteCaract" count="4/4" user="user" disabled={i % 2 == 0} />
+            ))}
         </div>
     );
 }
