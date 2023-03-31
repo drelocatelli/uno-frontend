@@ -18,7 +18,7 @@ function User() {
 
     function submitForm(e: React.MouseEvent) {
         const target = e.target as HTMLButtonElement;
-        new Audio('/assets/audio/draw.mp3').play();
+        new Audio('/assets/audio/UI_Quirky21.mp3').play();
         if (target.name == 'createAccount') {
             setRegister(true);
             return;
