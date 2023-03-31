@@ -6,7 +6,7 @@ function RoomCard(props: { id: string; title: string; user: string; count: strin
             audio.play()
         }
     }
-    
+
     return (
         <label className="card-label" htmlFor={`${props.id}_radio`} onClick={playSound}>
             <input type="radio" id={`${props.id}_radio`} className="roomRadio" name="room" value={props.id} disabled={props.disabled ?? false} />

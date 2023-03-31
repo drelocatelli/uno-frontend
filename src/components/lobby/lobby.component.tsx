@@ -1,36 +1,51 @@
 import Validate from './validate.component';
 import './lobby.scss';
 import RoomCard from './roomCard.component';
-import { FormEvent, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { ChangeEvent, FormEvent, MouseEvent, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../../store/alert/alertReducer';
 import { waitComponent } from '../../utils/waitComponent';
 import { LobbyFx } from './lobby.animation';
+import { IRootState } from '../../store/store';
+import { formActions } from '../../store/forms/formReducer';
 
 function Lobby() {
+    const dispatch = useDispatch();
     const lobbyRef = useRef<null | HTMLDivElement>(null);
-    
+    const { form: formState } = useSelector((state) => state) as IRootState;
+
     useEffect(() => {
         waitComponent(lobbyRef, () => {
             LobbyFx();
         });
-    }, [])
+    }, []);
+
+    function toggleFullRooms(e: ChangeEvent) {
+        const target = e.target as HTMLInputElement;
+        dispatch(formActions.setShowFullRooms(target.checked));
+    }
 
     return (
         <Validate>
             <div id="app">
                 <div ref={lobbyRef} className="lobby-container">
                     <div className="first-header">
-                        <div className='first-header-content'>
+                        <div className="first-header-content">
                             <div className="checkbox">
-                                <input type="checkbox" name="roomFull" id="roomFull" />
+                                <input
+                                    type="checkbox"
+                                    name="roomFull"
+                                    id="roomFull"
+                                    defaultChecked={formState.showFullRooms}
+                                    onChange={toggleFullRooms}
+                                />
                                 <label htmlFor="roomFull">Mostrar salas cheias</label>
                             </div>
                         </div>
                         <a href="/lobby" className="logo showFx" style={{ marginBottom: '10px', zIndex: '1' }}>
                             <img src="/assets/img/logo.png" />
                         </a>
-                        <div className='first-header-content'>
+                        <div className="first-header-content">
                             <img src="/assets/img/user-example.png" />
                         </div>
                     </div>
@@ -74,18 +89,19 @@ function Header() {
 }
 
 function Rooms() {
+    const { form: formState } = useSelector((state) => state) as IRootState;
     const dispatch = useDispatch();
 
     function selectRoom(e: FormEvent) {
         e.preventDefault();
         const target = e.target as HTMLFormElement;
         const roomSelected = new FormData(target).get('room');
-        if(roomSelected == null) {
-            dispatch(alertActions.setModal({isActive: true, temporary: true, message: 'Você deve escolher uma sala primeiro!'}));
+        if (roomSelected == null) {
+            dispatch(alertActions.setModal({ isActive: true, temporary: true, message: 'Você deve escolher uma sala primeiro!' }));
         } else {
             const audio = new Audio('/assets/audio/draw.mp3');
             audio.play();
-            dispatch(alertActions.setModal({isActive: true, temporary: true, withSound: false, message: `Sala selecionada: ${roomSelected}`}));
+            dispatch(alertActions.setModal({ isActive: true, temporary: true, withSound: false, message: `Sala selecionada: ${roomSelected}` }));
         }
     }
 
@@ -93,16 +109,24 @@ function Rooms() {
         <>
             <form onSubmit={selectRoom}>
                 <div className="rooms">
-                    {Array.from(Array(15), (e, i) => (
-                        <RoomCard key={i} id={i.toString()} title="Sala02LimiteCaract" count="4/4" user="user" disabled={i % 2 == 0} />
-                    ))}
+                    {Array.from(Array(15), (e, i) => {
+                        const disabled = i % 2 == 0;
+                        const randomUserNumber = Math.floor(Math.random() * 4) + 1;
+                        if(formState.showFullRooms && disabled) {
+                            return <RoomCard key={i} id={i.toString()} title="Sala02LimiteCaract" count="4/4" user="user" disabled={disabled} />;
+                        } else {
+                            return <RoomCard key={i} id={i.toString()} title="Sala02LimiteCaract" count={`${randomUserNumber}/4`} user="user" disabled={false} />;
+                        }
+                    })}
                 </div>
                 <div className="controls">
-                    <button type="submit" style={{padding: '.8rem 5rem'}}>Entrar</button>
-                    <div className='pagination'>
+                    <button type="submit" style={{ padding: '.8rem 5rem' }}>
+                        Entrar
+                    </button>
+                    <div className="pagination">
                         <img src="/assets/img/arrow_left.png" />
                         <div className="page">1 / 20</div>
-                        <img src="/assets/img/arrow_left.png" style={{rotate: '180deg'}} />
+                        <img src="/assets/img/arrow_left.png" style={{ rotate: '180deg' }} />
                     </div>
                 </div>
             </form>
