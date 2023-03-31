@@ -1,7 +1,7 @@
 import Validate from './validate.component';
 import './lobby.scss';
 import RoomCard from './roomCard.component';
-import { ChangeEvent, FormEvent, MouseEvent, useEffect, useRef } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../../store/alert/alertReducer';
 import { waitComponent } from '../../utils/waitComponent';
@@ -12,7 +12,7 @@ import { formActions } from '../../store/forms/formReducer';
 function Lobby() {
     const dispatch = useDispatch();
     const lobbyRef = useRef<null | HTMLDivElement>(null);
-    const { form: formState } = useSelector((state) => state) as IRootState;
+    const { form: formState, auth: authState } = useSelector((state) => state) as IRootState;
 
     useEffect(() => {
         waitComponent(lobbyRef, () => {
@@ -46,7 +46,21 @@ function Lobby() {
                             <img src="/assets/img/logo.png" />
                         </a>
                         <div className="first-header-content">
-                            <img src="/assets/img/user-example.png" />
+                            <div className="user-profile-menu">
+                                <div className="profile-photo">
+                                    {authState.avatarSeed != null ? (
+                                        <img src={authState.avatarSeed} />
+                                    ) : (
+                                        <img src="https://api.dicebear.com/5.x/fun-emoji/svg?seed=36315" />
+                                    )}
+                                </div>
+                                <div className="profile-name">
+                                    #userloggedIn
+                                </div>
+                                <div className="menu">
+                                    <img src="/assets/img/arrow_down.png" draggable={false} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="lobby showFx">
@@ -111,11 +125,20 @@ function Rooms() {
                 <div className="rooms">
                     {Array.from(Array(15), (e, i) => {
                         const disabled = i % 2 == 0;
-                        const randomUserNumber = Math.floor(Math.random() * 4) + 1;
-                        if(formState.showFullRooms && disabled) {
+                        const randomUserNumber = Math.floor(Math.random() * 3) + 1;
+                        if (formState.showFullRooms && disabled) {
                             return <RoomCard key={i} id={i.toString()} title="Sala02LimiteCaract" count="4/4" user="user" disabled={disabled} />;
                         } else {
-                            return <RoomCard key={i} id={i.toString()} title="Sala02LimiteCaract" count={`${randomUserNumber}/4`} user="user" disabled={false} />;
+                            return (
+                                <RoomCard
+                                    key={i}
+                                    id={i.toString()}
+                                    title="Sala02LimiteCaract"
+                                    count={`${randomUserNumber}/4`}
+                                    user="user"
+                                    disabled={false}
+                                />
+                            );
                         }
                     })}
                 </div>

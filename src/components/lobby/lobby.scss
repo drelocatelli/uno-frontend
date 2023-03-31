@@ -19,8 +19,31 @@
                 top: 10px;
             }
 
-            input[type="checkbox"] {
+            input[type='checkbox'] {
                 zoom: 1.5;
+            }
+
+            .user-profile-menu {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+                cursor: pointer;
+                user-select: none;
+
+                .profile-photo img {
+                    width: 70px;
+                    height: 70px;
+                    clip-path: circle();
+                    object-fit: contain;
+                }
+
+                .menu {
+                    align-self: baseline;
+                    img {
+                        image-rendering: optimizeQuality;
+                    }
+                }
             }
         }
     }
@@ -71,22 +94,21 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            gap: .3rem;
+            gap: 0.3rem;
             justify-content: space-evenly;
 
             .card-label {
                 .card {
-                    transition: border-color 0s, box-shadow .3s ease-out!important;
+                    transition: border-color 0s, box-shadow 0.3s ease-out !important;
                 }
-                
-                input[type="radio"] {
-                   display: none;
+
+                input[type='radio'] {
+                    display: none;
                     &:checked + .card {
-                        border-color: red!important;
+                        border-color: red !important;
                     }
                 }
             }
-
         }
 
         .controls {
@@ -110,6 +132,5 @@
                 }
             }
         }
-
     }
 }
