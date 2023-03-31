@@ -36,10 +36,10 @@ function Login() {
     return (
         <div className="container">
             <div className="tabs">
-                <div className={`tab ${!login && 'active'}`} onClick={() => setLogin(false)}>
+                <div className={`tab ${!login && 'active'}`} onClick={() => {new Audio('/assets/audio/flipcard1.mp3').play() ; setLogin(false)}}>
                     Convidado
                 </div>
-                <div className={`tab ${login && 'active'}`} onClick={() => setLogin(true)}>
+                <div className={`tab ${login && 'active'}`} onClick={() => {new Audio('/assets/audio/flipcard1.mp3').play() ;setLogin(true)}}>
                     Fazer Login
                 </div>
             </div>
