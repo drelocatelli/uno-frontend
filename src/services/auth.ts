@@ -20,8 +20,6 @@ class Authentication {
                     const getSeed = parseInt(authState.avatarSeed.split('seed=')[1]);
                     const response = await instance.post('authentication/register', { ...user, avatarSeed: getSeed });
 
-                    console.log(response);
-
                     dispatch(loginActions.setType({ type: 'ok' }));
                 } else {
                     throw new CustomError('Selecione um avatar');
