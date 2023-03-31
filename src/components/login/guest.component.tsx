@@ -17,6 +17,8 @@ function Guest() {
 
     function submitForm(e: React.MouseEvent) {
         const target = e.target as HTMLButtonElement;
+        new Audio('/assets/audio/draw.mp3').play();
+
         if(target.form?.checkValidity()) {
             handleLogin(new FormData(target.form as HTMLFormElement));
         } else {
@@ -31,7 +33,7 @@ function Guest() {
     }
 
     function selectAvatar() {
-        new Audio('/public/assets/audio/Whip_2.mp3').play();
+        new Audio('/assets/audio/Whip_2.mp3').play();
         dispatch(Authentication.getAvatarSeed() as any);
     }
 

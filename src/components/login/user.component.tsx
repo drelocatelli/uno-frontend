@@ -18,6 +18,7 @@ function User() {
 
     function submitForm(e: React.MouseEvent) {
         const target = e.target as HTMLButtonElement;
+        new Audio('/assets/audio/draw.mp3').play();
         if (target.name == 'createAccount') {
             setRegister(true);
             return;
@@ -47,7 +48,7 @@ function User() {
     }
 
     function selectAvatar() {
-        new Audio('/public/assets/audio/Whip_2.mp3').play();
+        new Audio('/assets/audio/Whip_2.mp3').play();
         dispatch(Authentication.getAvatarSeed() as any);
     }
 
