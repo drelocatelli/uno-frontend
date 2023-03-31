@@ -19,11 +19,11 @@ function Alert() {
         if(!alert.isActive) {
             AlertCloseFx();
         }
-        if(alert.temporary) {
-            setTimeout(() => {
-                dispatch(alertActions.closeModal());
-            }, 5000)
-        }
+        // if(alert.temporary) {
+            // setTimeout(() => {
+                // dispatch(alertActions.closeModal());
+            // }, 5000)
+        // }
     }, [alert])
     
     function toggleAlert() {
