@@ -7,21 +7,21 @@
     height: 100vh;
 
     .logo:hover {
-        filter:none;
+        filter: none;
     }
 
     .logo img {
-        zoom: .7;
+        zoom: 0.7;
         image-rendering: optimizeQuality;
     }
 
     .container {
-        transition: opacity .3s;
+        transition: opacity 0.3s;
         opacity: 0;
         border-radius: 5px;
         visibility: hidden;
         pointer-events: none;
-        background: #0096DC;
+        background: #0096dc;
         box-shadow: -6px 10px 0px rgb(0 0 0 / 53%), 0 -11px 29px rgb(0 0 0 / 10%);
         width: 800px;
         height: 500px;
@@ -49,16 +49,43 @@
                 box-sizing: border-box;
                 height: 84px;
                 background-color: #fff;
-                color: #0096DC;
-                
+                color: #0096dc;
+
                 &.active {
                     border-top-left-radius: 5px;
                     border-top-right-radius: 5px;
-                    background-color: #0096DC;
+                    background-color: #0096dc;
                     color: #fff;
                 }
             }
         }
     }
-    
+
+    .login__avatar {
+        position: relative;
+        height: 250px;
+        width: 250px;
+        // background: black;
+
+        .avatar-profile {
+            width: 80%;
+            height: 80%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #9c9c9c;
+            border-radius: 15px;
+            contain: content;
+        }
+
+        .reload-icon {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            width: 50px;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
 }

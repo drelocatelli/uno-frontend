@@ -1,8 +1,7 @@
 function RoomCard(props: { id: string; title: string; user: string; count: string; disabled?: boolean }) {
 
     function playSound() {
-        const audio = document.querySelector('audio') as HTMLAudioElement;
-        audio.src = '/assets/audio/menu-selection.mp3';
+        const audio = new Audio('/assets/audio/menu-selection.mp3');
         if(props?.disabled == false ?? false) {
             audio.play()
         }

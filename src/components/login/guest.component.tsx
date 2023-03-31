@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Authentication from '../../services/auth';
+import { IRootState } from '../../store/store';
 import formValidation from '../basics/formValidation.component';
+import { ColorfulLoading } from '../loading/loading.component';
 import './guest.scss';
 import { TabFx } from './login.animation';
 
 function Guest() {
+    const {auth: authState} = useSelector(state => state) as IRootState;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -27,6 +30,10 @@ function Guest() {
         
     }
 
+    function selectAvatar() {
+        dispatch(Authentication.getAvatarSeed() as any);
+    }
+
     function handleLogin(formData: FormData) {
         dispatch(Authentication.authAsGuest({username: formData.get('username')!.toString()}) as any);
     }
@@ -46,7 +53,25 @@ function Guest() {
                     </form>
                 </div>
                 <div className="right">
-                    <img src="/assets/img/avatar_select.png" />
+                    <div className="login__avatar">
+                        <div className="avatar-profile">
+                            {authState.avatarSeed != null ? (
+                                <>
+                                    {authState.avatarSeed == 'loading' ? (
+                                        <ColorfulLoading />
+                                    ) : (
+                                        <img src={authState.avatarSeed} />
+                                    )}
+                                </>
+                            ) : (
+                                <>
+                                    Ocorreu um erro
+                                </>
+                            )}
+                        </div>
+                        <img className='reload-icon' onClick={selectAvatar} src="/assets/img/reload.png" draggable={false} />
+                    </div>
+                    {/* <img src="/assets/img/avatar_select.png" /> */}
                 </div>
             </div>   
         </>

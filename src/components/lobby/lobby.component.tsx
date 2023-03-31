@@ -83,8 +83,7 @@ function Rooms() {
         if(roomSelected == null) {
             dispatch(alertActions.setModal({isActive: true, temporary: true, message: 'Você deve escolher uma sala primeiro!'}));
         } else {
-            const audio = document.querySelector('audio') as HTMLAudioElement;
-            audio.src = '/assets/audio/draw.mp3';
+            const audio = new Audio('/assets/audio/draw.mp3');
             audio.play();
             dispatch(alertActions.setModal({isActive: true, temporary: true, message: `Sala selecionada: ${roomSelected}`}));
         }

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Authentication from '../../services/auth';
 import { alertActions } from '../../store/alert/alertReducer';
 import { ILoginState } from '../../store/login/loginReducer';
 import { IRootState } from '../../store/store';
@@ -21,6 +22,7 @@ function Login() {
     useEffect(() => {
         if (!mounted) {
             LoginFx();
+            dispatch(Authentication.getAvatarSeed() as any);
             setMounted(true);
         }
     }, [mounted]);
@@ -30,10 +32,6 @@ function Login() {
             navigate('/lobby');
         }
     }, [loginState]);
-
-    function easterEgg() {
-        dispatch(alertActions.setModal({ message: 'Olá mundo!', isActive: true, temporary: true }));
-    }
 
     return (
         <div className="container">

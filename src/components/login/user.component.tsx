@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Authentication from '../../services/auth';
+import { IRootState } from '../../store/store';
 import formValidation from '../basics/formValidation.component';
+import { ColorfulLoading } from '../loading/loading.component';
 import { TabFx } from './login.animation';
 import './user.scss';
 
 function User() {
     const dispatch = useDispatch();
     const [register, setRegister] = useState<boolean>(false);
+    const { auth: authState } = useSelector((state) => state) as IRootState;
 
     useEffect(() => {
         TabFx('.content__user');
@@ -15,7 +18,7 @@ function User() {
 
     function submitForm(e: React.MouseEvent) {
         const target = e.target as HTMLButtonElement;
-        if(target.name == "createAccount") {
+        if (target.name == 'createAccount') {
             setRegister(true);
             return;
         }
@@ -24,7 +27,7 @@ function User() {
                 handleLogin(new FormData(target.form as HTMLFormElement), 'login');
             } else if (target.name == 'register') {
                 handleLogin(new FormData(target.form as HTMLFormElement), 'register');
-            } 
+            }
         } else {
             formValidation(target.form!.elements);
         }
@@ -41,6 +44,10 @@ function User() {
                 path,
             ) as any,
         );
+    }
+
+    function selectAvatar() {
+        dispatch(Authentication.getAvatarSeed() as any);
     }
 
     return (
@@ -88,7 +95,16 @@ function User() {
                     </form>
                 </div>
                 <div className="right">
-                    <img src="/assets/img/avatar_select.png" width={210} />
+                    <div className="login__avatar">
+                        <div className="avatar-profile">
+                            {authState.avatarSeed != null ? (
+                                <>{authState.avatarSeed == 'loading' ? <ColorfulLoading /> : <img src={authState.avatarSeed} />}</>
+                            ) : (
+                                <>Ocorreu um erro</>
+                            )}
+                        </div>
+                        <img className="reload-icon" onClick={selectAvatar} src="/assets/img/reload.png" draggable={false} />
+                    </div>
                 </div>
             </div>
         </>
