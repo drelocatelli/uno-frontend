@@ -19,14 +19,13 @@ function Validate(props: PropsWithChildren) {
         );
     }, []);
 
+    if(authState.st == 'finished' && authState.authenticated) {
+        return(<>{children}</>)
+    }
+
     return (
         <div id="app">
-            {authState.st == 'finished' && authState.authenticated && <>{children}</>}
-            {authState.st == 'initial' && (
-                <>
-                    <ColorfulLoading size=".8" />
-                </>
-            )}
+            <ColorfulLoading size=".8" />
         </div>
     );
 }

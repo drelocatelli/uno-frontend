@@ -1,30 +1,45 @@
 import Validate from './validate.component';
 import './lobby.scss';
 import RoomCard from './roomCard.component';
-import { FormEvent } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { alertActions } from '../../store/alert/alertReducer';
+import { waitComponent } from '../../utils/waitComponent';
+import { LobbyFx } from './lobby.animation';
+
 function Lobby() {
+    const lobbyRef = useRef<null | HTMLDivElement>(null);
+    
+    useEffect(() => {
+        waitComponent(lobbyRef, () => {
+            LobbyFx();
+        });
+    }, [])
+
     return (
         <Validate>
-            <div className="first-header">
-                <div className='first-header-content'>
-                    <div className="checkbox">
-                        <input type="checkbox" name="roomFull" id="roomFull" />
-                        <label htmlFor="roomFull">Mostrar salas cheias</label>
+            <div id="app">
+                <div ref={lobbyRef} className="lobby-container">
+                    <div className="first-header">
+                        <div className='first-header-content'>
+                            <div className="checkbox">
+                                <input type="checkbox" name="roomFull" id="roomFull" />
+                                <label htmlFor="roomFull">Mostrar salas cheias</label>
+                            </div>
+                        </div>
+                        <a href="/lobby" className="logo showFx" style={{ marginBottom: '10px', zIndex: '1' }}>
+                            <img src="/assets/img/logo.png" />
+                        </a>
+                        <div className='first-header-content'>
+                            <img src="/assets/img/user-example.png" />
+                        </div>
                     </div>
-                </div>
-                <a href="/" className="logo showFx" style={{ marginBottom: '10px', zIndex: '1' }}>
-                    <img src="/assets/img/logo.png" />
-                </a>
-                <div className='first-header-content'>
-                    <img src="/assets/img/user-example.png" />
-                </div>
-            </div>
-            <div className="lobby showFx">
-                <Header />
-                <div className="outer">
-                    <Rooms />
+                    <div className="lobby showFx">
+                        <Header />
+                        <div className="outer">
+                            <Rooms />
+                        </div>
+                    </div>
                 </div>
             </div>
         </Validate>
