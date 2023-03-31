@@ -27,6 +27,7 @@ function Alert() {
     }, [alert])
     
     function toggleAlert() {
+        new Audio('/assets/audio/Whip_2.mp3').play();
         dispatch(alertActions.closeModal());
     }
     
