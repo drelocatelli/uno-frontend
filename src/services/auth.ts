@@ -14,7 +14,6 @@ class Authentication {
         return async (dispatch: Dispatch) => {
             dispatch(loginActions.setType({ type: 'loading' }));
             const { auth: authState } = store.getState() as any as IRootState;
-            const seed = authState.avatarSeed?.split('seed=')[1];
             try {
                 await sleep(5000);
                 if (authState.avatarSeed != null && authState.avatarSeed != 'loading') {
