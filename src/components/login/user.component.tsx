@@ -47,6 +47,7 @@ function User() {
     }
 
     function selectAvatar() {
+        new Audio('/public/assets/audio/Whip_2.mp3').play();
         dispatch(Authentication.getAvatarSeed() as any);
     }
 
