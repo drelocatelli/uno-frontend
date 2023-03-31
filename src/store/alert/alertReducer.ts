@@ -5,12 +5,14 @@ export interface IAlertState {
     message?: ReactNode;
     isActive: boolean;
     temporary: boolean;
+    withSound?: boolean;
 }
 
 const initialState : IAlertState = {
     message: undefined,
     isActive: false,
-    temporary: false
+    temporary: false,
+    withSound: true,
 };
 
 const alertSlice = createSlice({
@@ -21,10 +23,14 @@ const alertSlice = createSlice({
             state.message = action.payload?.message ?? state.message;
             state.isActive = action.payload.isActive;
             state.temporary = action.payload.temporary;
+            state.withSound = action.payload?.withSound ?? state.withSound;
         },
         closeModal:(state) => {
             state.isActive = false;
         },
+        reset: (state) => {
+            state = initialState;
+        }
     }
 });
 

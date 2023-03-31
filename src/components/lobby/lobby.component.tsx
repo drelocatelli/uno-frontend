@@ -85,7 +85,7 @@ function Rooms() {
         } else {
             const audio = new Audio('/assets/audio/draw.mp3');
             audio.play();
-            dispatch(alertActions.setModal({isActive: true, temporary: true, message: `Sala selecionada: ${roomSelected}`}));
+            dispatch(alertActions.setModal({isActive: true, temporary: true, withSound: false, message: `Sala selecionada: ${roomSelected}`}));
         }
     }
 

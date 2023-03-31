@@ -77,6 +77,8 @@ class Authentication {
 
             } catch (err) {
                 dispatch(authActions.setAvatarSeed(null));
+                dispatch(alertActions.setModal({ isActive: true, temporary: true, message: 'Não foi possível obter avatar' }));
+
                 console.log(err);
             }
         };

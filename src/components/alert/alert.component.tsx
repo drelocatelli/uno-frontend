@@ -11,9 +11,16 @@ function Alert() {
 
     useEffect(() => {
         if(alert.isActive) {
+            if(alert.withSound) {
+                console.log(alert)
+                new Audio('/assets/audio/UI_Quirky7.mp3').play();
+            }
             AlertFx();
         }
+        // reset alert sound FX
+        dispatch(alertActions.reset());        
     }, [alert]);
+
     
     useEffect(() => {
         if(!alert.isActive) {
