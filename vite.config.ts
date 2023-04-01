@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { fileURLToPath } from "node:url";
+import 'dotenv/config';
 
 const filesNeedToExclude = ["testing/**/*"];
 
@@ -12,7 +13,7 @@ const filesPathToExclude = filesNeedToExclude.map((src) => {
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000
+    port: process.env.PORT ? parseInt(process.env.PORT) : 3000
   },
   build: {
     manifest: true,
