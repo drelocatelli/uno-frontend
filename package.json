@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "test": "vitest",
+    "start": "npm run preview",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -9,10 +9,10 @@ class UserService {
         return async (dispatch: Dispatch) => {
             try {
                 await instance.get('profile');
-                dispatch(authActions.setAuth({authenticated: true, st: 'finished'}));
+                dispatch(authActions.setAuth({authenticated: true, st: 'finished', avatarSeed: '1'}));
             } catch(err) {
                 console.log(err)
-                dispatch(authActions.setAuth({authenticated: false, st: 'finished'}));
+                dispatch(authActions.setAuth({authenticated: false, st: 'finished', avatarSeed: '1'}));
                 if(onFail) 
                 onFail();
             }
