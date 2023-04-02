@@ -27,9 +27,7 @@ describe('guest login', () => {
         waitFor(async () => {
             expect(btnRandomAvatar).toBeInTheDocument();
             if(btnRandomAvatar) {
-                debug();
                 userEvent.click(await btnRandomAvatar);
-                debug();
                 // expect()
             } else {
                 throw new Error('Cannot find this button');
@@ -37,4 +35,5 @@ describe('guest login', () => {
             
         });
     });
+
 })

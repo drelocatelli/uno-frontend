@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
+    "target": "EsNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": false,
@@ -17,6 +17,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
   },
-  "include": ["src"],
+  "include": ["src", "testing"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
