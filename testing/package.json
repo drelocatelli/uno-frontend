@@ -1,0 +1,21 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test:watch": "tsnd -r dotenv/config --respawn --exit-child --transpile-only --watch --ignore-watch node_modules",
+    "test": "npm run test:watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "prompt-sync": "^4.2.0",
+    "puppeteer": "^19.8.2"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.3"
+  }
+}
