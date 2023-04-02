@@ -1,12 +1,24 @@
 import { Page } from "puppeteer";
 import AutomationTestSetup from "../bootstrap/AutomationTestSetup";
 
-class AutomationTest extends AutomationTestSetup {
+class LoginTest extends AutomationTestSetup {
     constructor() {
         super();
-        this.initializer().then(({page, browser}) => {
-            this.assertLogin(page);
+        this.initializer().then(async ({page, browser}) => {
+            await page.waitForSelector('.container');
+            await this.isGuestLogin(page);
+            await this.assertLogin(page);
         })
+    }
+    
+    async isGuestLogin(page: Page) {
+        const isGuest = await this.readLine('1. Guest login\n2. User registration\n') as ('1' | '2');
+        await page.evaluate(async (isGuest) => {
+            const tbs = document.querySelector('.tab.false') as HTMLButtonElement;
+            if(isGuest == '2') {
+                tbs.click();
+            }
+        }, isGuest);
     }
     
     async assertLogin(page: Page) {
@@ -18,7 +30,7 @@ class AutomationTest extends AutomationTestSetup {
             const btnEnter = await page.waitForSelector('div.content__guest button[name="enter"]');
             setTimeout(async () => {
                 await btnEnter?.evaluate((b) => b.click());
-            }, 2000);
+            }, 1000);
         } catch (err) {
             const createAccBtn = await page.waitForSelector('button[name="createAccount"]');
             createAccBtn?.evaluate(btn  => (btn as HTMLButtonElement).click());
@@ -44,10 +56,12 @@ class AutomationTest extends AutomationTestSetup {
             const registerBtn = await page.waitForSelector('button[name="register"]');
             setTimeout(async () => {
                 registerBtn?.evaluate((el: HTMLButtonElement) => el.click())
-            }, 2000);
+            }, 1000);
         }
     }
 
 }
 
-new AutomationTest();
+new LoginTest();
+
+export default LoginTest;

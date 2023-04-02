@@ -5,17 +5,13 @@ import AutomationTestSetup from '../bootstrap/AutomationTestSetup';
 class AutomationTest extends AutomationTestSetup {
     constructor() {
         super();
-        (async () => {
-            const { page } = await this.initializer();
-            await page.waitForSelector('.container');
+        this.initializer('.container').then(async ({page, browser}) => {
             while (true) {
                 let whichTest = (await this.questionTest()) as string;
                 this.assertTest(page, whichTest);
             }
-        })();
+        })
     }
-
-    
 
     async questionTest() {
         return await this.readLine('\n\nSelect test name:\n1. assert login\n2. assert profile picture\n3. assert login tabs\nSelect your option: ');
@@ -53,7 +49,7 @@ class AutomationTest extends AutomationTestSetup {
             const btnEnter = await page.waitForSelector('div.content__guest button[name="enter"]');
             setTimeout(async () => {
                 await btnEnter?.evaluate((b) => b.click());
-            }, 2000);
+            }, 1000);
         } catch (err) {
             const createAccBtn = await page.waitForSelector('button[name="createAccount"]');
             createAccBtn?.evaluate(btn  => (btn as HTMLButtonElement).click());
@@ -79,7 +75,7 @@ class AutomationTest extends AutomationTestSetup {
             const registerBtn = await page.waitForSelector('button[name="register"]');
             setTimeout(async () => {
                 registerBtn?.evaluate((el: HTMLButtonElement) => el.click())
-            }, 2000);
+            }, 1000);
         }
     }
 }

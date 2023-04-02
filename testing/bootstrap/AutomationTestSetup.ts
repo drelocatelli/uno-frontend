@@ -2,18 +2,20 @@ import puppeteer, { Browser, Page } from 'puppeteer';
 import readline from 'readline';
 
 abstract class AutomationTestSetup {
-    async initializer(): Promise<{ page: Page; browser: Browser }> {
+    async initializer(waitInitialContainer?: string): Promise<{ page: Page; browser: Browser }> {
         const browser = await puppeteer.launch({ headless: false, defaultViewport: null, args: ['--start-maximized'] });
         const page = await browser.newPage();
-
+        
         await this.open(page);
-
+        
+        if(waitInitialContainer) {
+            await page.waitForSelector(waitInitialContainer);
+        }
         return { browser, page };
     }
 
     async open(page: Page) {
         const port = process.env.PORT ?? 3000;
-        console.log(`Running test on http://localhost:${port}`);
         await page.goto(`http://localhost:${port}`);
     }
 
