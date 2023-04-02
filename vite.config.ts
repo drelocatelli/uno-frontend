@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react-swc'
 import { fileURLToPath } from "node:url";
 import 'dotenv/config';
 
-const filesNeedToExclude = ["testing/**/*"];
+const filesNeedToExclude = ["src/testing/**/*"];
 
 const filesPathToExclude = filesNeedToExclude.map((src) => {
   return fileURLToPath(new URL(src, import.meta.url));

@@ -10,13 +10,16 @@
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "target": "EsNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
   },
-  "include": ["src", "testing"],
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["src", "src/testing"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

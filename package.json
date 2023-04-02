@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "test": "vitest",
-    "test:watch": "ts-node --esm testing/index.ts",
+    "test:watch": "ts-node --esm src/testing/index.ts",
     "start": "npm run preview",
     "preview": "vite preview"
   },
