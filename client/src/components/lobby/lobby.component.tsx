@@ -8,6 +8,8 @@ import { waitComponent } from '../../utils/waitComponent';
 import { LobbyFx } from './lobby.animation';
 import { IRootState } from '../../store/store';
 import { formActions } from '../../store/forms/formReducer';
+import Authentication from '../../services/auth';
+import { useNavigate } from 'react-router-dom';
 
 function Lobby() {
     const dispatch = useDispatch();
@@ -74,6 +76,7 @@ function Lobby() {
 }
 
 function UserMenu() {
+    const navigate = useNavigate();
     const [userMenuOpen, setUserMenuOpen] = useState<boolean>(false);
     
     const userMenuProps = (): React.CSSProperties => {
@@ -87,12 +90,23 @@ function UserMenu() {
                   pointerEvents: 'none',
               };
     };
+
+    const logout = async () => {
+        try {
+            await Authentication.logout();
+            navigate(0);
+        } catch(err) {
+            console.log(err);
+            alert('Ocorreu um erro inesperado');
+        }
+    };
+    
     return (
         <div className="menu" onClick={() => setUserMenuOpen((state) => !state)}>
             <img src="/assets/img/arrow_down.png" draggable={false} />
             <div className="menu-widget" style={userMenuProps()}>
                 <li>Trocar usuário</li>
-                <li>
+                <li onClick={logout}>
                     <i className="fas fa-sign-out-alt"></i> &nbsp; Sair
                 </li>
             </div>
