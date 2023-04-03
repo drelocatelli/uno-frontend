@@ -10,7 +10,6 @@ import { IRootState } from '../../store/store';
 import { formActions } from '../../store/forms/formReducer';
 
 function Lobby() {
-    const [userMenuOpen, setUserMenuOpen] = useState<boolean>(false);
     const dispatch = useDispatch();
     const lobbyRef = useRef<null | HTMLDivElement>(null);
     const { form: formState, auth: authState } = useSelector((state) => state) as IRootState;
@@ -26,15 +25,7 @@ function Lobby() {
         dispatch(formActions.setShowFullRooms(target.checked));
     }
 
-    const userMenuProps =  () : React.CSSProperties => {
-        return userMenuOpen ? {
-            opacity: 1,
-            pointerEvents: 'all'
-        } : {
-            opacity: 0,
-            pointerEvents: 'none'
-        }
-    };
+    
 
     return (
         <Validate>
@@ -65,19 +56,8 @@ function Lobby() {
                                         <img src="https://api.dicebear.com/5.x/fun-emoji/svg?seed=36315" />
                                     )}
                                 </div>
-                                <div className="profile-name">
-                                    #userloggedIn
-                                </div>
-                                <div className="menu" onClick={() => setUserMenuOpen(state => !state)}>
-                                    <img src="/assets/img/arrow_down.png" draggable={false} />
-                                    <div className="menu-widget" style={userMenuProps()}>
-                                        <li>Trocar usuário</li>
-                                        <li>
-                                            <i className="fas fa-sign-out-alt"></i> &nbsp;
-                                            Sair
-                                        </li>
-                                    </div>
-                                </div>
+                                <div className="profile-name">#userloggedIn</div>
+                                <UserMenu />
                             </div>
                         </div>
                     </div>
@@ -93,8 +73,34 @@ function Lobby() {
     );
 }
 
-function Header() {
+function UserMenu() {
+    const [userMenuOpen, setUserMenuOpen] = useState<boolean>(false);
+    
+    const userMenuProps = (): React.CSSProperties => {
+        return userMenuOpen
+            ? {
+                  opacity: 1,
+                  pointerEvents: 'all',
+              }
+            : {
+                  opacity: 0,
+                  pointerEvents: 'none',
+              };
+    };
+    return (
+        <div className="menu" onClick={() => setUserMenuOpen((state) => !state)}>
+            <img src="/assets/img/arrow_down.png" draggable={false} />
+            <div className="menu-widget" style={userMenuProps()}>
+                <li>Trocar usuário</li>
+                <li>
+                    <i className="fas fa-sign-out-alt"></i> &nbsp; Sair
+                </li>
+            </div>
+        </div>
+    );
+}
 
+function Header() {
     return (
         <div className="header">
             <div className="search">
