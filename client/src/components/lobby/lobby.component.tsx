@@ -26,6 +26,16 @@ function Lobby() {
         dispatch(formActions.setShowFullRooms(target.checked));
     }
 
+    const userMenuProps =  () : React.CSSProperties => {
+        return userMenuOpen ? {
+            opacity: 1,
+            pointerEvents: 'all'
+        } : {
+            opacity: 0,
+            pointerEvents: 'none'
+        }
+    };
+
     return (
         <Validate>
             <div id="app">
@@ -60,7 +70,7 @@ function Lobby() {
                                 </div>
                                 <div className="menu" onClick={() => setUserMenuOpen(state => !state)}>
                                     <img src="/assets/img/arrow_down.png" draggable={false} />
-                                    <div className="menu-widget" style={{display: userMenuOpen ? 'block': 'none'}}>
+                                    <div className="menu-widget" style={userMenuProps()}>
                                         <li>Trocar usuário</li>
                                         <li>
                                             <i className="fas fa-sign-out-alt"></i> &nbsp;
