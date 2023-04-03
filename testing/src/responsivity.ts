@@ -1,11 +1,8 @@
 import { Browser, Page } from "puppeteer";
 import AutomationTestSetup from "../bootstrap/AutomationTestSetup";
-import {exec} from 'child_process';
 
 class ResponsivityTest extends AutomationTestSetup {
-
-    constructor() {
-        super();
+    init() {
         this.initializer().then(async ({page, browser}) => {
             await page.waitForSelector('.container');
             await this.takeSnapshot(page, browser);    
@@ -37,4 +34,6 @@ class ResponsivityTest extends AutomationTestSetup {
 
 }
 
-new ResponsivityTest();
+new ResponsivityTest().init();
+
+export default ResponsivityTest;

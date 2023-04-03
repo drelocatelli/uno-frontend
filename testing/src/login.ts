@@ -2,23 +2,29 @@ import { Page } from "puppeteer";
 import AutomationTestSetup from "../bootstrap/AutomationTestSetup";
 
 class LoginTest extends AutomationTestSetup {
-    constructor() {
+    constructor(page: Page) {
         super();
+        this.assert(page);
+    }
+    
+    init() {
         this.initializer().then(async ({page, browser}) => {
             await page.waitForSelector('.container');
-            await this.isGuestLogin(page);
-            await this.assertLogin(page);
+            await this.assert(page);
         })
     }
     
-    async isGuestLogin(page: Page) {
+    async assert(page: Page) {
         const isGuest = await this.readLine('1. Guest login\n2. User registration\n') as ('1' | '2');
         await page.evaluate(async (isGuest) => {
-            const tbs = document.querySelector('.tab.false') as HTMLButtonElement;
+            const tbs = document.querySelectorAll('.tab') as NodeListOf<HTMLButtonElement>;
             if(isGuest == '2') {
-                tbs.click();
+                tbs[1].click();
+            } else {
+                tbs[0].click();
             }
         }, isGuest);
+        await this.assertLogin(page);
     }
     
     async assertLogin(page: Page) {
@@ -61,7 +67,5 @@ class LoginTest extends AutomationTestSetup {
     }
 
 }
-
-new LoginTest();
 
 export default LoginTest;
