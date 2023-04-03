@@ -2,7 +2,6 @@ import { Browser, Page } from 'puppeteer';
 import AutomationTestSetup from '../bootstrap/AutomationTestSetup';
 import LoginTest from './tests/login.spec';
 import LogoutTest from './tests/logout.spec';
-import ResponsivityTest from './tests/responsivity.spec';
 import fs from 'fs';
 
 class Test extends AutomationTestSetup {
