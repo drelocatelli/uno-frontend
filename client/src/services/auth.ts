@@ -83,6 +83,10 @@ class Authentication {
             }
         };
     }
+
+    static  logout() {
+        return instance.put('authentication/logout');
+    }
 }
 
 export default Authentication;
