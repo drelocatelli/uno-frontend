@@ -1,5 +1,5 @@
 import { Browser, Page } from "puppeteer";
-import AutomationTestSetup from "../bootstrap/AutomationTestSetup";
+import AutomationTestSetup from "../../bootstrap/AutomationTestSetup";
 
 class ResponsivityTest extends AutomationTestSetup {
     init() {

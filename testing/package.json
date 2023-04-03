@@ -11,8 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/async": "^3.2.18",
-    "async": "^3.2.4",
     "dotenv": "^16.0.3",
     "prompt-sync": "^4.2.0",
     "puppeteer": "^19.8.2"
