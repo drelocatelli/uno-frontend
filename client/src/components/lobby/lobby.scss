@@ -61,6 +61,7 @@
                         border: 1px solid #b3b3b3;
                         color:#6b6b6b;
                         box-sizing: border-box;
+                        transition: opacity .2s ease-in;
 
                         li {
                             list-style: none;
