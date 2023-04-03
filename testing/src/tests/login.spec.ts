@@ -15,10 +15,10 @@ class LoginTest extends AutomationTestSetup {
     }
     
     async assert(page: Page) {
-        const isGuest = await this.readLine('1. Guest login\n2. User registration\n') as ('1' | '2');
+        const isGuest = await this.readDialog(page, 'Login as guest?', 'confirm');
         await page.evaluate(async (isGuest) => {
             const tbs = document.querySelectorAll('.tab') as NodeListOf<HTMLButtonElement>;
-            if(isGuest == '2') {
+            if(!isGuest) {
                 tbs[1].click();
             } else {
                 tbs[0].click();

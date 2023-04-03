@@ -105,8 +105,8 @@ function UserMenu() {
         <div className="menu" onClick={() => setUserMenuOpen((state) => !state)}>
             <img src="/assets/img/arrow_down.png" draggable={false} />
             <div className="menu-widget" style={userMenuProps()}>
-                <li>Trocar usuário</li>
-                <li onClick={logout}>
+                <li id="changeUserBtn">Trocar usuário</li>
+                <li onClick={logout} id="logoutBtn">
                     <i className="fas fa-sign-out-alt"></i> &nbsp; Sair
                 </li>
             </div>
