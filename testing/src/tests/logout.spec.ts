@@ -1,5 +1,5 @@
-import { Page } from "puppeteer";
-import AutomationTestSetup from "../../bootstrap/AutomationTestSetup";
+import { Page } from 'puppeteer';
+import AutomationTestSetup from '../../bootstrap/AutomationTestSetup';
 
 class LogoutTest extends AutomationTestSetup {
     constructor(page: Page) {
@@ -9,23 +9,20 @@ class LogoutTest extends AutomationTestSetup {
 
     async assert(page: Page) {
         await page.waitForSelector('.user-profile-menu');
-        setTimeout(async () => {
-            const question = await this.readDialog(page, 'Logout?', 'confirm');
-            if(question) {
-                const menu = await page.waitForSelector('.menu') ;
-                menu?.evaluate(btn => {
-                    (btn as HTMLButtonElement).click();
-                })
+        const question = await this.readDialog(page, 'Logout?', 'confirm');
+        if (question) {
+            const menu = await page.waitForSelector('.menu');
+            menu?.evaluate((btn) => {
+                (btn as HTMLButtonElement).click();
+            });
 
-                setTimeout(async () => {
-                    await page.evaluate(() => {
-                        const logoutBtn = document.querySelector('.menu-widget li#logoutBtn') as HTMLButtonElement;
-                        logoutBtn.click();
-                    });
-                    
-                }, 1000)
-            }
-        }, 2000)
+            setTimeout(async () => {
+                await page.evaluate(() => {
+                    const logoutBtn = document.querySelector('.menu-widget li#logoutBtn') as HTMLButtonElement;
+                    logoutBtn.click();
+                });
+            }, 1000);
+        }
     }
 }
 
