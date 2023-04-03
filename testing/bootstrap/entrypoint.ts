@@ -6,7 +6,7 @@ class Entrypoint extends AutomationTestSetup {
 
     constructor() {
         super();
-        this.initializer('http://localhost:3000').then(async ({ page, browser }) => {
+        this.initializer('.container').then(async ({ page, browser }) => {
             await this.createTestSelection(page, browser);
         });
     }
