@@ -6,17 +6,17 @@ abstract class AutomationTestSetup {
         const browser = await puppeteer.launch({ headless: false, defaultViewport: null, args: ['--start-maximized'] });
         const page = await browser.newPage();
         
-        await this.open(page);
+        await this.open(page, waitInitialContainer);
         
+        return { browser, page };
+    }
+    
+    async open(page: Page, waitInitialContainer?: string) {
+        const port = process.env.PORT ?? 3000;
+        await page.goto(`http://localhost:${port}`);
         if(waitInitialContainer) {
             await page.waitForSelector(waitInitialContainer);
         }
-        return { browser, page };
-    }
-
-    async open(page: Page) {
-        const port = process.env.PORT ?? 3000;
-        await page.goto(`http://localhost:${port}`);
     }
 
     randomNumber(quantity: number) {
