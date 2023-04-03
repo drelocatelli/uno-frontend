@@ -17,14 +17,14 @@ class Test extends AutomationTestSetup {
                 await this.runTests([
                     this.tests.login(page),
                 ]);
-                await this.readLine('Select [Enter]: ');
             }
         });
     }
-
+    
     async runTests(testOrder: Array<any>) {
         try {
             await Promise.all(testOrder);
+            await this.readLine('Select [Enter]: ');
         } catch (err) {
             console.log(err);
         }
