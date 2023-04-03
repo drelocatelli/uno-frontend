@@ -1,0 +1,17 @@
+{
+  "name": "test-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:watch": "tsnd -r dotenv/config --respawn --exit-child --transpile-only --watch --ignore-watch node_modules",
+    "test": "npm run test:watch bootstrap/entrypoint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "puppeteer": "^19.8.3"
+  }
+}
