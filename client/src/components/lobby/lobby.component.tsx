@@ -1,7 +1,7 @@
 import Validate from './validate.component';
 import './lobby.scss';
 import RoomCard from './roomCard.component';
-import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
+import { ChangeEvent, FormEvent, memo, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../../store/alert/alertReducer';
 import { waitComponent } from '../../utils/waitComponent';
@@ -10,6 +10,7 @@ import { IRootState } from '../../store/store';
 import { formActions } from '../../store/forms/formReducer';
 
 function Lobby() {
+    const [userMenuOpen, setUserMenuOpen] = useState<boolean>(false);
     const dispatch = useDispatch();
     const lobbyRef = useRef<null | HTMLDivElement>(null);
     const { form: formState, auth: authState } = useSelector((state) => state) as IRootState;
@@ -57,8 +58,15 @@ function Lobby() {
                                 <div className="profile-name">
                                     #userloggedIn
                                 </div>
-                                <div className="menu">
+                                <div className="menu" onClick={() => setUserMenuOpen(state => !state)}>
                                     <img src="/assets/img/arrow_down.png" draggable={false} />
+                                    <div className="menu-widget" style={{display: userMenuOpen ? 'block': 'none'}}>
+                                        <li>Trocar usuário</li>
+                                        <li>
+                                            <i className="fas fa-sign-out-alt"></i> &nbsp;
+                                            Sair
+                                        </li>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,6 +84,7 @@ function Lobby() {
 }
 
 function Header() {
+
     return (
         <div className="header">
             <div className="search">
@@ -102,7 +111,7 @@ function Header() {
     );
 }
 
-function Rooms() {
+const Rooms = memo(() => {
     const { form: formState } = useSelector((state) => state) as IRootState;
     const dispatch = useDispatch();
 
@@ -155,6 +164,6 @@ function Rooms() {
             </form>
         </>
     );
-}
+});
 
 export default Lobby;
