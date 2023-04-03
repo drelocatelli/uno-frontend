@@ -1,45 +1,32 @@
-import 'dotenv/config';
-import { Page } from 'puppeteer';
-import AutomationTestSetup from '../bootstrap/AutomationTestSetup';
+import { Page } from "puppeteer";
+import AutomationTestSetup from "../../bootstrap/AutomationTestSetup";
 
-class AutomationTest extends AutomationTestSetup {
-    constructor() {
+class LoginTest extends AutomationTestSetup {
+    constructor(page: Page) {
         super();
-        this.initializer('.container').then(async ({page, browser}) => {
-            while (true) {
-                let whichTest = (await this.questionTest()) as string;
-                this.assertTest(page, whichTest);
-            }
+        this.assert(page);
+    }
+    
+    init() {
+        this.initializer().then(async ({page, browser}) => {
+            await page.waitForSelector('.container');
+            await this.assert(page);
         })
     }
-
-    async questionTest() {
-        return await this.readLine('\n\nSelect test name:\n1. assert login\n2. assert profile picture\n3. assert login tabs\nSelect your option: ');
+    
+    async assert(page: Page) {
+        const isGuest = await this.readLine('1. Guest login\n2. User registration\n') as ('1' | '2');
+        await page.evaluate(async (isGuest) => {
+            const tbs = document.querySelectorAll('.tab') as NodeListOf<HTMLButtonElement>;
+            if(isGuest == '2') {
+                tbs[1].click();
+            } else {
+                tbs[0].click();
+            }
+        }, isGuest);
+        await this.assertLogin(page);
     }
-
-    async assertTest(page: Page, testId: string) {
-        switch (testId) {
-            case '1':
-                return this.assertLogin(page);
-            case '2':
-                return this.assertProfilePicture(page);
-            case '3':
-                return this.assertTabs(page);
-            default:
-                return console.log('Test not found');
-        }
-    }
-
-    async assertProfilePicture(page: Page) {
-        const chgProfilePictureBtn = await page.waitForSelector('.container img.reload-icon');
-        chgProfilePictureBtn?.evaluate((btn) => btn.click());
-    }
-
-    async assertTabs(page: Page) {
-        const containerTabs = await page.waitForSelector('.container .tabs .tab.false');
-        await containerTabs?.evaluate((btn) => (btn as HTMLButtonElement).click());
-    }
-
+    
     async assertLogin(page: Page) {
         try {
             await page.waitForSelector('div.content__guest', { timeout: 500 });
@@ -78,6 +65,7 @@ class AutomationTest extends AutomationTestSetup {
             }, 1000);
         }
     }
+
 }
 
-new AutomationTest();
+export default LoginTest;

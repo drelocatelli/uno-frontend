@@ -1,6 +1,6 @@
 import { Page } from 'puppeteer';
 import AutomationTestSetup from '../bootstrap/AutomationTestSetup';
-import LoginTest from './login';
+import LoginTest from './tests/login.spec';
 
 class Test extends AutomationTestSetup {
     tests = {
