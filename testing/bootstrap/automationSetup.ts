@@ -1,25 +1,28 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import fs from 'fs';
 import readline from 'readline';
-
 abstract class AutomationTestSetup {
-    async initializer(waitInitialContainer?: string): Promise<{ page: Page; browser: Browser }> {
+    async initializer(url: string, waitInitialContainer?: string): Promise<{ page: Page; browser: Browser }> {
         const browser = await puppeteer.launch({ headless: false, defaultViewport: null, args: ['--start-maximized'] });
         const page = await browser.newPage();
         
-        await this.open(page, waitInitialContainer);
+        await this.open(page, url, waitInitialContainer);
         
         return { browser, page };
     }
     
-    async open(page: Page, waitInitialContainer?: string) {
-        const port = process.env.PORT ?? 3000;
-        await page.goto(`http://localhost:${port}`);
+    async open(page: Page, url: string, waitInitialContainer?: string) {
+        await page.goto(url);
         if(waitInitialContainer) {
             await page.waitForSelector(waitInitialContainer);
         }
     }
 
+    protected async getFilesInDir(dir: string) {
+        const files = fs.readdirSync(dir);
+        return files.filter(f => !f.startsWith('basic')).map(t => t = t.replace('.spec.ts', ''));
+    }
+    
     randomNumber(quantity: number) {
         let num = '';
         for (let i = 0; i < quantity; i++) {
@@ -29,19 +32,19 @@ abstract class AutomationTestSetup {
         return randomNum.toString();
     }
 
-    generateRandomUser() : string {
+    generateRandomUser(charactersQuantity: number) : string {
         let username = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const charactersLength = characters.length;
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < charactersQuantity; i++) {
             username += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
 
         return username;
     }
-
-    async readLine(question: string) {
+    
+    async readConsole(question: string) {
         const rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout,
@@ -77,6 +80,8 @@ abstract class AutomationTestSetup {
             message,
         );
     }
+
+
 }
 
 export default AutomationTestSetup;
