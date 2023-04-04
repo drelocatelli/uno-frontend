@@ -34,7 +34,7 @@ class LoginTest extends AutomationTestSetup {
             const createAccBtn = await page.waitForSelector('button[name="createAccount"]');
             createAccBtn?.evaluate(btn  => (btn as HTMLButtonElement).click());
 
-            const randomUser = this.generateRandomUser();
+            const randomUser = this.generateRandomUser(30);
             const randomPass = this.randomNumber(10);
 
             const usernameIn = await page.waitForSelector('input[name="username"]');
