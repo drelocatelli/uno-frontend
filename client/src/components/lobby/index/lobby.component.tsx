@@ -1,14 +1,14 @@
-import Validate from './validate.component';
+import Validate from '../validate.component';
 import './lobby.scss';
 import RoomCard from './roomCard.component';
 import { ChangeEvent, FormEvent, memo, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { alertActions } from '../../store/alert/alertReducer';
-import { waitComponent } from '../../utils/waitComponent';
+import { alertActions } from '../../../store/alert/alertReducer';
+import { waitComponent } from '../../../utils/waitComponent';
 import { LobbyFx } from './lobby.animation';
-import { IRootState } from '../../store/store';
-import { formActions } from '../../store/forms/formReducer';
-import Authentication from '../../services/auth';
+import { IRootState } from '../../../store/store';
+import { formActions } from '../../../store/forms/formReducer';
+import Authentication from '../../../services/auth';
 import { useNavigate } from 'react-router-dom';
 
 function Lobby() {
@@ -26,8 +26,6 @@ function Lobby() {
         const target = e.target as HTMLInputElement;
         dispatch(formActions.setShowFullRooms(target.checked));
     }
-
-    
 
     return (
         <Validate>
