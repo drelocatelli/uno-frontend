@@ -1,8 +1,24 @@
-import puppeteer, { Browser, Page } from 'puppeteer';
+import { Browser, Page } from 'puppeteer';
 import fs from 'fs';
 import readline from 'readline';
+import puppeteer from 'puppeteer-extra';
+//@ts-ignore
+import puppeteerPrefs from 'puppeteer-extra-plugin-user-preferences';
 abstract class AutomationTestSetup {
     async initializer(url: string, waitInitialContainer?: string): Promise<{ page: Page; browser: Browser }> {
+          //@ts-ignore
+          puppeteer.use(
+            puppeteerPrefs({
+                userPrefs: {
+                    devtools: {
+                        preferences: {
+                            currentDockState: '"bottom"',
+                            uiTheme: '"dark"',
+                        },
+                    },
+                },
+            }),
+        );
         const browser = await puppeteer.launch({ headless: false, defaultViewport: null, args: ['--start-maximized'] });
         const page = await browser.newPage();
         
