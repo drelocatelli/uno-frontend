@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Index from "./components/index/index.component";
-import Lobby from "./components/lobby/index/lobby.component";
+import Lobby from "./components/lobby/index/lobby";
 
 function Router() {
     
