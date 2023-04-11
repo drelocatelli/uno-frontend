@@ -11,7 +11,7 @@ const filesPathToExclude = filesNeedToExclude.map((src) => {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react({jsxImportSource: '@emotion/react'})],
   server: {
     port: process.env.PORT ? parseInt(process.env.PORT) : 3000
   },
