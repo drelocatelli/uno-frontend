@@ -13,6 +13,7 @@ function AnimationLoading(props: IProps) {
     const [intervalId, setIntervalId] = useState(null);
 
     useEffect(() => {
+        removeInitialCards();
         startAnim();
         const animationInterval = setInterval(() => {
             startAnim();
@@ -21,8 +22,24 @@ function AnimationLoading(props: IProps) {
         setIntervalId(animationInterval);
 
         return () => clearInterval(animationInterval);
-    }, []);
+    }, [isLoading]);
 
+    useEffect(() => {
+        if(!isLoading) {
+            clearInterval(intervalId);
+        }
+    }, [isLoading])
+
+    const removeInitialCards = () => {
+        const cardContainer = document.querySelector('#table');
+        if(getComputedStyle(cardContainer).animationName != 'none') {
+            setTimeout(() => {
+                console.log('Loading animation stopped');
+                cardContainer.innerHTML = '';
+            }, 3000);
+        }
+    };
+    
     const startAnim = () => {
         (function () {
             'use strict';
@@ -120,14 +137,12 @@ function AnimationLoading(props: IProps) {
         const randomIndex = Math.floor(Math.random() * 2);
         const randomArray = randomIndex === 0 ? cardsJSON.cards : cardsJSON.wildcard;
         const randomCard = randomArray[Math.floor(Math.random() * randomArray.length)];
-
-        console.log(randomCard);
         card.style.setProperty('--bgUrl', `url('/assets/img/cards/${randomCard}.png')`);
     };
 
     return (
         <>
-            <div id="table" css={tableStyle} style={{display: isLoading ? 'block' : 'none'}}></div>
+            <div id="table" css={tableStyle} style={{animation: isLoading ? 'none' : 'blurEnd 3s ease-in-out forwards'}}></div>
             <div css={{ position: 'relative', zIndex: 2 }}>{props.children}</div>
         </>
     );
@@ -140,7 +155,8 @@ const tableStyle = css`
     width: -webkit-fill-available;
     height: 100vh;
     overflow: hidden;
-    opacity: 0.8;
+    transition: opacity 3s ease-in-out;
+    opacity: 1;
 
     .card__loading {
         background-image: var(--bgUrl);
@@ -150,6 +166,14 @@ const tableStyle = css`
         height: 179px;
         pointer-events: none;
         user-select: none;
+    }
+
+    @keyframes blurEnd {
+        from {
+        }
+        to {
+            opacity: 0;
+        }
     }
 `;
 

@@ -10,7 +10,6 @@ import Guest from './guest.component';
 import LoginFx from './login.animation';
 import './login.scss';
 import User from './user.component';
-import Contribution from './hooks/useContribution';
 import useContribution from './hooks/useContribution';
 
 function Login() {
@@ -38,7 +37,9 @@ function Login() {
     return (
         <div className="entrypoint">
             {showingContribution ? (
-                <div className="contribution" css={{fontSize: '8rem', userSelect: 'none', fontWeight: 'bold', color: '#000', textShadow: '3px 0px 1px #fff'}}>
+                <div
+                    className="contribution"
+                    css={{ fontSize: '8rem', userSelect: 'none', fontWeight: 'bold', color: '#000', textShadow: '3px 0px 1px #fff' }}>
                     {contributionText}
                 </div>
             ) : (
@@ -62,22 +63,26 @@ function Login() {
                         </div>
                     </div>
                     {loginState == 'initial' || loginState == 'error' ? (
-                        <>{login ? <User /> : <Guest />}</>
+                        <>
+                            {login ? <User /> : <Guest />}
+                            <div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                                <a href="#" css={{ color: '#fff', textShadow: '1px 0px 3px #000' }} onClick={handleContributionAnimation}>
+                                    [Contribuições]
+                                </a>
+                            </div>
+                        </>
                     ) : (
                         loginState == 'loading' && (
-                            <div style={{ transform: 'translateY(50%)', textAlign: 'center', scale: '.6' }}>
-                                <ColorfulLoading />
-                                <h1 style={{ color: '#fff', position: 'relative', top: '6rem', userSelect: 'none' }}>
-                                    Aguardando entrada no lobby...
-                                </h1>
-                            </div>
+                            <>
+                                <div style={{ transform: 'translateY(50%)', textAlign: 'center', scale: '.6' }}>
+                                    <ColorfulLoading />
+                                    <h1 style={{ color: '#fff', position: 'relative', top: '6rem', userSelect: 'none' }}>
+                                        Aguardando entrada no lobby...
+                                    </h1>
+                                </div>
+                            </>
                         )
                     )}
-                    <div css={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                        <a href="#" css={{ color: '#fff', textShadow: '1px 0px 3px #000' }} onClick={handleContributionAnimation}>
-                            [Contribuições]
-                        </a>
-                    </div>
                 </div>
             )}
         </div>
