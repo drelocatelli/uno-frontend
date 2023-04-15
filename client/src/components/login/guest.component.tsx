@@ -11,7 +11,7 @@ import { sleep } from '../basics/sleep';
 function Guest() {
     const { auth: authState } = useSelector((state) => state) as IRootState;
     const dispatch = useDispatch();
-    
+
     const isLoadingAvatar = authState.avatarSeed.isLoading && authState.avatarSeed.seed != null;
 
     useEffect(() => {
@@ -71,11 +71,15 @@ function Guest() {
                 <div className="right">
                     <div className="login__avatar">
                         <div className="avatar-profile">
-                            {authState.avatarSeed.seed != null ? <img onLoad={loadAvatar} src={authState.avatarSeed.seed} /> : <>Ocorreu um erro</>}
+                            {authState.avatarSeed.seed != null ? (
+                                <img onLoad={loadAvatar} css={isLoadingAvatar ? { filter: 'grayscale(1)', opacity: '.1' } : {}} src={authState.avatarSeed.seed} />
+                            ) : (
+                                <>Ocorreu um erro</>
+                            )}
                         </div>
                         <img
                             className={`reload-icon ${isLoadingAvatar ? 'rotate' : ''}`}
-                            onClick={() => isLoadingAvatar ? null : selectAvatar()}
+                            onClick={() => (isLoadingAvatar ? null : selectAvatar())}
                             src="/assets/img/reload.png"
                             draggable={false}
                         />
