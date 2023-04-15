@@ -11,7 +11,7 @@
     }
 
     .logo img {
-        zoom: 0.7;
+        zoom: 0.8;
         image-rendering: optimizeQuality;
     }
 
@@ -88,6 +88,22 @@
             width: 50px;
             cursor: pointer;
             user-select: none;
+            transition: opacity .2s;
+            
+            &.rotate {
+                cursor: not-allowed;
+                opacity: .8;
+                animation: rotate 2s infinite forwards;
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                rotate: 0deg;
+            }
+            to {
+                rotate: 360deg;
+            }
         }
     }
 }

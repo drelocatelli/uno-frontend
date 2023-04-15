@@ -20,9 +20,23 @@ function IndexFX(onComplete: Function) {
         timeline.to('.logo', {duration: 0, y: '-300%'})
         timeline.to('.logo', {duration: .8,  ease: 'back', y: '40%', onComplete: () => {timeline2.resume()}})
 }
+
+function RepelFX(target: string) {
+    const targetEl = document.querySelector(target) as HTMLElement;
+    targetEl.style.position = 'relative';
+    targetEl?.addEventListener('mousemove', (e) => {
+        const {offsetX, offsetY} = e as MouseEvent;
+        gsap.to(targetEl, { y: `${offsetY * - 1 / 8}px`, x: `${offsetX * - 1 / 8}px`, ease: 'circ' });
+    })
+    targetEl?.addEventListener('mouseleave', (e) => {
+        console.dir(targetEl)
+        gsap.to(targetEl, {duration: 2, y: `${targetEl.offsetTop}px`, x: `${targetEl.offsetLeft}px`, ease: 'back' });
+    })
+}
+
 function IndexFXEnd() {
     const timeline4 = gsap.timeline({paused: false});
         timeline4.to('.initialLoading', {duration: .2, opacity: 0, display: 'none'})
 }
 
-export {IndexFX, IndexFXEnd};
+export {IndexFX, IndexFXEnd, RepelFX};

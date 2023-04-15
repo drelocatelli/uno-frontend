@@ -5,7 +5,7 @@ import UserService from "../../services/user";
 import { IRootState } from "../../store/store";
 import { GooeyRingLoading } from "../loading/loading.component";
 import Login from "../login/login.component";
-import { IndexFX, IndexFXEnd } from "./index.animation";
+import { IndexFX, IndexFXEnd, RepelFX } from "./index.animation";
 import './index.scss';
 import AnimationLoading from "../loading/animation.component";
 
@@ -27,10 +27,11 @@ function Index() {
             dispatch(UserService.validate() as any);
         }
     }, [animationFinished]);
-
+    
     useEffect(() => {
         if(authState.st == 'finished') {
             IndexFXEnd();
+            RepelFX('.logo img');
         }
     }, [authState])
 

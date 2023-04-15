@@ -6,11 +6,15 @@ import formValidation from '../basics/formValidation.component';
 import { ColorfulLoading } from '../loading/loading.component';
 import { TabFx } from './login.animation';
 import './user.scss';
+import { authActions } from '../../store/auth/authReducer';
+import { sleep } from '../basics/sleep';
 
 function User() {
     const dispatch = useDispatch();
     const [register, setRegister] = useState<boolean>(false);
     const { auth: authState } = useSelector((state) => state) as IRootState;
+    
+    const isLoadingAvatar = authState.avatarSeed.isLoading && authState.avatarSeed.seed != null;
 
     useEffect(() => {
         TabFx('.content__user');
@@ -51,6 +55,11 @@ function User() {
         new Audio('/assets/audio/Whip_2.mp3').play();
         dispatch(Authentication.getAvatarSeed() as any);
     }
+
+    const loadAvatar = async () => {
+        await sleep(2000);
+        dispatch(authActions.setAvatarSeedLoading(false));
+    };
 
     return (
         <>
@@ -99,13 +108,14 @@ function User() {
                 <div className="right">
                     <div className="login__avatar">
                         <div className="avatar-profile">
-                            {authState.avatarSeed != null ? (
-                                <>{authState.avatarSeed == 'loading' ? <ColorfulLoading /> : <img src={authState.avatarSeed} />}</>
-                            ) : (
-                                <>Ocorreu um erro</>
-                            )}
+                             {authState.avatarSeed.seed != null ? <img onLoad={loadAvatar} src={authState.avatarSeed.seed} /> : <>Ocorreu um erro</>}
                         </div>
-                        <img className="reload-icon" onClick={selectAvatar} src="/assets/img/reload.png" draggable={false} />
+                        <img
+                            className={`reload-icon ${isLoadingAvatar ? 'rotate' : ''}`}
+                            onClick={() => isLoadingAvatar ? null : selectAvatar()}
+                            src="/assets/img/reload.png"
+                            draggable={false}
+                        />
                     </div>
                 </div>
             </div>

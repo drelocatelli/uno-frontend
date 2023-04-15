@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import Authentication from '../../services/auth';
 import { IRootState } from '../../store/store';
 import formValidation from '../basics/formValidation.component';
-import { ColorfulLoading } from '../loading/loading.component';
 import './guest.scss';
 import { TabFx } from './login.animation';
+import { authActions } from '../../store/auth/authReducer';
+import { sleep } from '../basics/sleep';
 
 function Guest() {
-    const {auth: authState} = useSelector(state => state) as IRootState;
+    const { auth: authState } = useSelector((state) => state) as IRootState;
     const dispatch = useDispatch();
+    
+    const isLoadingAvatar = authState.avatarSeed.isLoading && authState.avatarSeed.seed != null;
 
     useEffect(() => {
         TabFx('.content__guest');
@@ -19,7 +22,7 @@ function Guest() {
         const target = e.target as HTMLButtonElement;
         new Audio('/assets/audio/UI_Quirky21.mp3').play();
 
-        if(target.form?.checkValidity()) {
+        if (target.form?.checkValidity()) {
             handleLogin(new FormData(target.form as HTMLFormElement));
         } else {
             formValidation(target.form!.elements);
@@ -29,7 +32,6 @@ function Guest() {
         // } else if(target.name == 'createRoom') {
 
         // }
-        
     }
 
     function selectAvatar() {
@@ -38,45 +40,48 @@ function Guest() {
     }
 
     function handleLogin(formData: FormData) {
-        dispatch(Authentication.authAsGuest({username: formData.get('username')!.toString()}) as any);
+        dispatch(Authentication.authAsGuest({ username: formData.get('username')!.toString() }) as any);
     }
 
-    return(
+    const loadAvatar = async () => {
+        await sleep(2000);
+        dispatch(authActions.setAvatarSeedLoading(false));
+    };
+
+    return (
         <>
             <div className="content__guest">
                 <div className="left">
                     <h1>Escolha seu nick</h1>
                     <form onSubmit={(e) => e.preventDefault()} noValidate>
-                        <input type="text" name="username" placeholder='Seu nick aqui' required/>
-                        <span id="usernameError" className='errorInput'>&nbsp;</span>
+                        <input type="text" name="username" placeholder="Seu nick aqui" required />
+                        <span id="usernameError" className="errorInput">
+                            &nbsp;
+                        </span>
                         <div className="buttons">
-                            <button type='button' onClick={submitForm} name="enter">Entrar</button>
-                            <button type='button' onClick={submitForm} name="createRoom">Criar sala</button>
+                            <button type="button" onClick={submitForm} name="enter">
+                                Entrar
+                            </button>
+                            <button type="button" onClick={submitForm} name="createRoom">
+                                Criar sala
+                            </button>
                         </div>
                     </form>
                 </div>
                 <div className="right">
                     <div className="login__avatar">
                         <div className="avatar-profile">
-                            {authState.avatarSeed != null ? (
-                                <>
-                                    {authState.avatarSeed == 'loading' ? (
-                                        <ColorfulLoading />
-                                    ) : (
-                                        <img src={authState.avatarSeed} />
-                                    )}
-                                </>
-                            ) : (
-                                <>
-                                    Ocorreu um erro
-                                </>
-                            )}
+                            {authState.avatarSeed.seed != null ? <img onLoad={loadAvatar} src={authState.avatarSeed.seed} /> : <>Ocorreu um erro</>}
                         </div>
-                        <img className='reload-icon' onClick={selectAvatar} src="/assets/img/reload.png" draggable={false} />
+                        <img
+                            className={`reload-icon ${isLoadingAvatar ? 'rotate' : ''}`}
+                            onClick={() => isLoadingAvatar ? null : selectAvatar()}
+                            src="/assets/img/reload.png"
+                            draggable={false}
+                        />
                     </div>
-                    {/* <img src="/assets/img/avatar_select.png" /> */}
                 </div>
-            </div>   
+            </div>
         </>
     );
 }

@@ -81,7 +81,7 @@ function AnimationLoading(props: IProps) {
 
                 gsap.set(card, {
                     y: -table.offsetHeight,
-                    x: table.offsetWidth / 2,
+                    x: table.offsetWidth / 5,
                     zIndex: -1,
                 });
                 let offsetX = table.offsetWidth * 0.5,

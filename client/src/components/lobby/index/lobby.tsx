@@ -9,6 +9,7 @@ import { formActions } from '../../../store/forms/formReducer';
 import UserMenu from './components/userMenu';
 import LobbyHeader from './components/lobbyHeader';
 import Rooms from './components/rooms';
+import { RepelFX } from '../../index/index.animation';
 
 function Lobby() {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function Lobby() {
     useEffect(() => {
         waitComponent(lobbyRef, () => {
             LobbyFx();
+            RepelFX('.logo img');
         });
     }, []);
 
@@ -50,7 +52,7 @@ function Lobby() {
                             <div className="user-profile-menu">
                                 <div className="profile-photo">
                                     {authState.avatarSeed != null ? (
-                                        <img src={authState.avatarSeed} />
+                                        <img src={authState.avatarSeed.seed} />
                                     ) : (
                                         <img src="https://api.dicebear.com/5.x/fun-emoji/svg?seed=36315" />
                                     )}

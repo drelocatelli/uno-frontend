@@ -16,8 +16,8 @@ class Authentication {
             const { auth: authState } = store.getState() as any as IRootState;
             try {
                 await sleep(5000);
-                if (authState.avatarSeed != null && authState.avatarSeed != 'loading') {
-                    const getSeed = parseInt(authState.avatarSeed.split('seed=')[1]);
+                if (authState.avatarSeed != null && !authState.avatarSeed.isLoading) {
+                    const getSeed = parseInt(authState.avatarSeed?.seed?.split('seed=')[1] as any);
                     const response = await instance.post('authentication/register', { ...user, avatarSeed: getSeed });
 
                     dispatch(loginActions.setType({ type: 'ok' }));
@@ -42,8 +42,8 @@ class Authentication {
 
             try {
                 await sleep(5000);
-                if (authState.avatarSeed != null && authState.avatarSeed != 'loading' || path == 'login') {
-                    const getSeed = parseInt(authState?.avatarSeed?.split('seed=')[1] ?? "1");
+                if (!authState.avatarSeed.isLoading || path == 'login') {
+                    const getSeed = parseInt(authState?.avatarSeed?.seed?.split('seed=')[1] ?? "1");
 
                     await instance.post(path == 'login' ? 'authentication/login' : 'authentication/register', { ...user, avatarSeed: getSeed });
 
@@ -69,14 +69,15 @@ class Authentication {
 
     static getAvatarSeed() {
         return async (dispatch: Dispatch) => {
-            dispatch(authActions.setAvatarSeed('loading'));
             try {
+                dispatch(authActions.setAvatarSeedLoading(true));
+
                 const response = await instance.get('avatars');
                 const data = response.data as { seed: number; url: string };
-                dispatch(authActions.setAvatarSeed(data.url));
+                dispatch(authActions.setAvatarSeed({seed: data.url}));
 
             } catch (err) {
-                dispatch(authActions.setAvatarSeed(null));
+                dispatch(authActions.setAvatarSeed({isLoading: false, seed: null}));
                 dispatch(alertActions.setModal({ isActive: true, temporary: true, message: 'Não foi possível obter avatar' }));
 
                 console.log(err);

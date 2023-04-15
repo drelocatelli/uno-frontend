@@ -3,13 +3,19 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface IAuthState {
     st: 'initial' | 'finished'
     authenticated: boolean;
-    avatarSeed: string | 'loading' | null,
+    avatarSeed: {
+        isLoading: boolean,
+        seed: string | null
+    },
 }
 
 const initialState: IAuthState = {
     st: 'initial',
     authenticated: false,
-    avatarSeed: null,
+    avatarSeed: {
+        isLoading: true,
+        seed: null
+    },
 };
 
 const authSlice = createSlice({
@@ -20,8 +26,14 @@ const authSlice = createSlice({
             state.authenticated = action.payload.authenticated;
             state.st = action.payload.st;
         },
-        setAvatarSeed: (state, action: PayloadAction<any>) => {
-            state.avatarSeed = action.payload as any;
+        setAvatarSeed: (state, action: PayloadAction<{isLoading?: boolean, seed: string | null}>) => {
+            if(action.payload.isLoading) {
+                state.avatarSeed.isLoading = action.payload.isLoading;
+            }
+            state.avatarSeed.seed = action.payload.seed;
+        },
+        setAvatarSeedLoading: (state, action: PayloadAction<boolean>) => {
+           state.avatarSeed.isLoading = action.payload;
         }
     }
 });
