@@ -72,7 +72,7 @@ function Guest() {
                     <div className="login__avatar">
                         <div className="avatar-profile">
                             {authState.avatarSeed.seed != null ? (
-                                <img onLoad={loadAvatar} css={isLoadingAvatar ? { filter: 'grayscale(1)', opacity: '.1' } : {}} src={authState.avatarSeed.seed} />
+                                <img onLoad={loadAvatar} style={{transition: 'opacity .5s ease-out'}} css={isLoadingAvatar ? { filter: 'grayscale(1)', opacity: '0.1' } : {}} src={authState.avatarSeed.seed} />
                             ) : (
                                 <>Ocorreu um erro</>
                             )}
