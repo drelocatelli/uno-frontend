@@ -7,7 +7,7 @@ import { ILoginState } from '../../store/login/loginReducer';
 import { IRootState } from '../../store/store';
 import { ColorfulLoading } from '../loading/loading.component';
 import Guest from './guest.component';
-import LoginFx from './login.animation';
+import LoginFx, { HideLoginFX } from './login.animation';
 import './login.scss';
 import User from './user.component';
 import useContribution from './hooks/useContribution';
@@ -30,7 +30,9 @@ function Login() {
 
     useEffect(() => {
         if (loginState == 'ok') {
-            navigate('/lobby');
+            HideLoginFX(() => {
+                navigate('/lobby');
+            })
         }
     }, [loginState]);
 

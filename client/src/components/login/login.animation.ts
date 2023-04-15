@@ -12,4 +12,12 @@ function TabFx(tab: string) {
         timeline.to(tab, {delay: .2, ease:'power3', duration: .5, opacity: 1});
 }
 
-export {TabFx};
+function HideLoginFX(callback: Function) {
+    gsap.to('#app', {duration: .4, opacity: 0, display: 'none', onComplete: () => {
+        setTimeout(() => {
+            callback();
+        }, 3000)
+    }});
+}
+
+export {TabFx, HideLoginFX};

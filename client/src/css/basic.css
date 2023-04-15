@@ -9,6 +9,10 @@ body.animated {
     animation: animation-background 35s ease-in-out;
 }
 
+.logo img {
+    filter: drop-shadow(0px 4px 6px #0000002b);
+}
+
 .errorInput {
     color: #a53838;
     padding: 0.5rem 0;

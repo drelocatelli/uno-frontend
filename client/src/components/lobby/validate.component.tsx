@@ -19,8 +19,8 @@ function Validate(props: PropsWithChildren) {
         );
     }, []);
 
-    if(authState.st == 'finished' && authState.authenticated) {
-        return(<>{children}</>)
+    if (authState.st == 'finished' && authState.authenticated) {
+        return <>{children}</>;
     }
 
     return (

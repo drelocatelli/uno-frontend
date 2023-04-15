@@ -13,15 +13,18 @@ function AnimationLoading(props: IProps) {
     const [intervalId, setIntervalId] = useState(null);
 
     useEffect(() => {
-        removeInitialCards();
-        startAnim();
-        const animationInterval = setInterval(() => {
+        if(isLoading) {
             startAnim();
-        }, 3000);
-
-        setIntervalId(animationInterval);
-
-        return () => clearInterval(animationInterval);
+            const animationInterval = setInterval(() => {
+                startAnim();
+            }, 3000);
+            
+            setIntervalId(animationInterval);
+            
+            return () => clearInterval(animationInterval);
+        } else {
+            removeInitialCards();
+        }
     }, [isLoading]);
 
     useEffect(() => {
