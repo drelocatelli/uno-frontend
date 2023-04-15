@@ -44,7 +44,7 @@ function Guest() {
     }
 
     const loadAvatar = async () => {
-        await sleep(2000);
+        await sleep(1000);
         dispatch(authActions.setAvatarSeedLoading(false));
     };
 
