@@ -108,7 +108,7 @@ function User() {
                 <div className="right">
                     <div className="login__avatar">
                         <div className="avatar-profile">
-                             {authState.avatarSeed.seed != null ? <img onLoad={loadAvatar} src={authState.avatarSeed.seed} /> : <>Ocorreu um erro</>}
+                             {authState.avatarSeed.seed != null ? <img onLoad={loadAvatar} style={{transition: 'opacity .5s ease-out'}} css={isLoadingAvatar ? { filter: 'grayscale(1)', opacity: '0.1' } : {}} src={authState.avatarSeed.seed} /> : <>Ocorreu um erro</>}
                         </div>
                         <img
                             className={`reload-icon ${isLoadingAvatar ? 'rotate' : ''}`}
