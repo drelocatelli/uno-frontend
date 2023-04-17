@@ -3,6 +3,7 @@ import { IRootState } from "../../store/store";
 import { authActions } from '../../store/auth/authReducer';
 import { sleep } from '../basics/sleep';
 import Authentication from "../../services/auth";
+import { ColorfulLoading } from "../loading/loading.component";
 
 function Avatar() {
     const dispatch = useDispatch();
@@ -23,12 +24,16 @@ function Avatar() {
         <div className="login__avatar">
             <div className="avatar-profile">
                 {authState.avatarSeed.seed != null ? (
-                    <img
-                        onLoad={loadAvatar}
-                        style={{ transition: 'opacity .5s ease-out' }}
-                        css={isLoadingAvatar ? { filter: 'grayscale(1)', opacity: '0.1' } : {}}
-                        src={authState.avatarSeed.seed}
-                    />
+                    <>
+                        {isLoadingAvatar && (
+                            <ColorfulLoading />
+                        )}
+                        <img
+                            onLoad={loadAvatar}
+                            style={{ transition: 'opacity .5s ease-out', display: isLoadingAvatar ? 'none': 'block' }}
+                            src={authState.avatarSeed.seed}
+                        />
+                    </>
                 ) : (
                     <>Ocorreu um erro</>
                 )}

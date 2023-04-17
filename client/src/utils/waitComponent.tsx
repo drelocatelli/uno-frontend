@@ -1,6 +1,6 @@
 function waitComponent(element: React.MutableRefObject<HTMLElement | null>, cb: any) {
     const retry = setInterval(() => {
-        if(element != null) {
+        if(element.current != null) {
             clearInterval(retry);
             cb();
         }

@@ -6,7 +6,7 @@ function IndexFX(onComplete: Function) {
     timeline2.to('.initialLoading', {duration: .6, opacity: 1})
         
     const timeline3 = gsap.timeline({paused: true});
-        timeline3.from('.initialLoading', {duration: 1, y: '50%'})
+        timeline3.from('.initialLoading', {duration: 1, y: '-25%'})
         timeline3.to('.initialLoading', {ease: 'circ', duration: 1, opacity: 1, onComplete: () => {
             onComplete();
         }})
@@ -17,8 +17,8 @@ function IndexFX(onComplete: Function) {
 
     const timeline = gsap.timeline();
     timeline.to('.container', {duration: 0, visibility: 'hidden'});
-        timeline.to('.logo', {duration: 0, y: '-300%'})
-        timeline.to('.logo', {duration: .8,  ease: 'back', y: '40%', onComplete: () => {timeline2.resume()}})
+        timeline.to('.logo', {duration: 0, y: '-500%'})
+        timeline.to('.logo', {duration: .8,  ease: 'back', y: '50%', onComplete: () => {timeline2.resume()}})
 }
 
 function RepelFX(target: string) {

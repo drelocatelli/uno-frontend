@@ -8,6 +8,8 @@ import Login from "../login/login.component";
 import { IndexFX, IndexFXEnd, RepelFX } from "./index.animation";
 import './index.scss';
 import AnimationLoading from "../loading/animation.component";
+import DistributeCardsSVG from '/assets/img/loading/distributecards.svg'; 
+
 
 function Index() {
     const dispatch = useDispatch();
@@ -48,7 +50,8 @@ function Index() {
                     <img src="/assets/img/logo.png" />
                 </a>
                 <div className="initialLoading" style={{opacity: '0'}}>
-                    <GooeyRingLoading size=".8" />
+                    <object data={DistributeCardsSVG} width={'250px'} />
+                    {/* <GooeyRingLoading size=".8" /> */}
                 </div>
                 {(!authState.authenticated && authState.st == 'finished') && (
                     <Login />

@@ -70,13 +70,15 @@
         // background: black;
 
         .avatar-profile {
+            display: flex;
+            align-items: center;
             width: 80%;
             height: 80%;
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            background-color: #9c9c9c;
+            background-color: #222;
             border: 2px solid #fff;
             border-radius: 15px;
             contain: content;

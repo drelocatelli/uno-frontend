@@ -18,7 +18,7 @@ function Lobby() {
 
     useEffect(() => {
         waitComponent(lobbyRef, () => {
-            LobbyFx();
+            LobbyFx(lobbyRef.current);
             RepelFX('.logo img');
         });
     }, []);

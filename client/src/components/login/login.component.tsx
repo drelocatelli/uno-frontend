@@ -11,6 +11,7 @@ import LoginFx, { HideLoginFX } from './login.animation';
 import './login.scss';
 import User from './user.component';
 import useContribution from './hooks/useContribution';
+import LobbyLoading from './lobbyLoading.component';
 
 function Login() {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ function Login() {
         if (loginState == 'ok') {
             HideLoginFX(() => {
                 navigate('/lobby');
-            })
+            });
         }
     }, [loginState]);
 
@@ -74,16 +75,7 @@ function Login() {
                             </div>
                         </>
                     ) : (
-                        loginState == 'loading' && (
-                            <>
-                                <div style={{ transform: 'translateY(50%)', textAlign: 'center', scale: '.6' }}>
-                                    <ColorfulLoading />
-                                    <h1 style={{ color: '#fff', position: 'relative', top: '6rem', userSelect: 'none' }}>
-                                        Aguardando entrada no lobby...
-                                    </h1>
-                                </div>
-                            </>
-                        )
+                        loginState == 'loading' && <LobbyLoading />
                     )}
                 </div>
             )}
