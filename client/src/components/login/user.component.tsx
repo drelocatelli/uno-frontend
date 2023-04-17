@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Authentication from '../../services/auth';
-import { IRootState } from '../../store/store';
 import formValidation from '../basics/formValidation.component';
-import { ColorfulLoading } from '../loading/loading.component';
 import { TabFx } from './login.animation';
-import './user.scss';
-import { authActions } from '../../store/auth/authReducer';
-import { sleep } from '../basics/sleep';
+import styles from './user.module.scss';
+import Avatar from './avatar.component';
+import { css } from '@emotion/react';
 
 function User() {
     const dispatch = useDispatch();
     const [register, setRegister] = useState<boolean>(false);
-    const { auth: authState } = useSelector((state) => state) as IRootState;
-    
-    const isLoadingAvatar = authState.avatarSeed.isLoading && authState.avatarSeed.seed != null;
 
     useEffect(() => {
         TabFx('.content__user');
@@ -51,20 +46,12 @@ function User() {
         );
     }
 
-    function selectAvatar() {
-        new Audio('/assets/audio/Whip_2.mp3').play();
-        dispatch(Authentication.getAvatarSeed() as any);
-    }
-
-    const loadAvatar = async () => {
-        await sleep(2000);
-        dispatch(authActions.setAvatarSeedLoading(false));
-    };
+    
 
     return (
         <>
-            <div className="content__user">
-                <div className="left">
+            <div className={`${styles.content__user} content__user`}>
+                <div className={styles.left}>
                     <form onSubmit={(e) => e.preventDefault()}>
                         {register && (
                             <>
@@ -89,9 +76,12 @@ function User() {
                         </div>
                         <div className="buttons">
                             {register ? (
-                                <button type="button" name="register" onClick={submitForm}>
-                                    Registrar
-                                </button>
+                                <div css={{display: 'flex', flexGrow: 1, flexDirection: 'row', alignItems: 'flex-end'}}>
+                                    <button type="button" name="register" onClick={submitForm}>
+                                        Registrar
+                                    </button>
+                                    <a href="javascript:void(0);" onClick={() => setRegister(state => !state)} css={css`color: #fff; margin: 0 1rem;`}>Cancelar</a>
+                                </div>
                             ) : (
                                 <>
                                     <button type="button" name="enter" onClick={submitForm}>
@@ -105,18 +95,8 @@ function User() {
                         </div>
                     </form>
                 </div>
-                <div className="right">
-                    <div className="login__avatar">
-                        <div className="avatar-profile">
-                             {authState.avatarSeed.seed != null ? <img onLoad={loadAvatar} style={{transition: 'opacity .5s ease-out'}} css={isLoadingAvatar ? { filter: 'grayscale(1)', opacity: '0.1' } : {}} src={authState.avatarSeed.seed} /> : <>Ocorreu um erro</>}
-                        </div>
-                        <img
-                            className={`reload-icon ${isLoadingAvatar ? 'rotate' : ''}`}
-                            onClick={() => isLoadingAvatar ? null : selectAvatar()}
-                            src="/assets/img/reload.png"
-                            draggable={false}
-                        />
-                    </div>
+                <div className={styles.right}>
+                    <Avatar />
                 </div>
             </div>
         </>

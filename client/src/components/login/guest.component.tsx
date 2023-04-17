@@ -1,18 +1,13 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Authentication from '../../services/auth';
-import { IRootState } from '../../store/store';
 import formValidation from '../basics/formValidation.component';
-import './guest.scss';
+import style from './guest.module.scss';
 import { TabFx } from './login.animation';
-import { authActions } from '../../store/auth/authReducer';
-import { sleep } from '../basics/sleep';
+import Avatar from './avatar.component';
 
 function Guest() {
-    const { auth: authState } = useSelector((state) => state) as IRootState;
     const dispatch = useDispatch();
-
-    const isLoadingAvatar = authState.avatarSeed.isLoading && authState.avatarSeed.seed != null;
 
     useEffect(() => {
         TabFx('.content__guest');
@@ -34,24 +29,14 @@ function Guest() {
         // }
     }
 
-    function selectAvatar() {
-        new Audio('/assets/audio/Whip_2.mp3').play();
-        dispatch(Authentication.getAvatarSeed() as any);
-    }
-
     function handleLogin(formData: FormData) {
         dispatch(Authentication.authAsGuest({ username: formData.get('username')!.toString() }) as any);
     }
 
-    const loadAvatar = async () => {
-        await sleep(1000);
-        dispatch(authActions.setAvatarSeedLoading(false));
-    };
-
     return (
-        <>
-            <div className="content__guest">
-                <div className="left">
+        <> 
+            <div className={`${style.content__guest} content__guest`}>
+                <div className={style.left}>
                     <h1>Escolha seu nick</h1>
                     <form onSubmit={(e) => e.preventDefault()} noValidate>
                         <input type="text" name="username" placeholder="Seu nick aqui" required />
@@ -68,22 +53,8 @@ function Guest() {
                         </div>
                     </form>
                 </div>
-                <div className="right">
-                    <div className="login__avatar">
-                        <div className="avatar-profile">
-                            {authState.avatarSeed.seed != null ? (
-                                <img onLoad={loadAvatar} style={{transition: 'opacity .5s ease-out'}} css={isLoadingAvatar ? { filter: 'grayscale(1)', opacity: '0.1' } : {}} src={authState.avatarSeed.seed} />
-                            ) : (
-                                <>Ocorreu um erro</>
-                            )}
-                        </div>
-                        <img
-                            className={`reload-icon ${isLoadingAvatar ? 'rotate' : ''}`}
-                            onClick={() => (isLoadingAvatar ? null : selectAvatar())}
-                            src="/assets/img/reload.png"
-                            draggable={false}
-                        />
-                    </div>
+                <div className={style.right}>
+                    <Avatar />
                 </div>
             </div>
         </>

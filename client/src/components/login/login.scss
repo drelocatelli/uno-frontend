@@ -16,6 +16,8 @@
     }
 
     .container {
+        display: flex;
+        flex-direction: column;
         transition: opacity 0.3s;
         opacity: 0;
         border-radius: 5px;
